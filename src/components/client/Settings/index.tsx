@@ -72,6 +72,7 @@ const [Tab, setTab] = createSignal<Index>(0);
 const Settings: Component = () => {
   return (
       <Dialog
+        fullScreen
         open={ReChat.showSettings()}
         onClose={() => ReChat.setShowSettings(false)}
         TransitionComponent={Transition}

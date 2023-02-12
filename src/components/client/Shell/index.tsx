@@ -40,7 +40,7 @@ const Shell: Component = (props: any) => {
             color="inherit"
             component="div"
           >
-            ReChat
+            {ReChat.servers.current_channel?.name || "ReChat"}
           </Typography>
           <IconButton onClick={() => ReChat.setShowSettings(true)}>
             <SettingsIcon />

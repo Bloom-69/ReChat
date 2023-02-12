@@ -8,9 +8,16 @@ import {
   Toolbar,
   Typography,
 } from "@suid/material";
-import { Menu as MenuIcon, Settings } from "@suid/icons-material";
+import {
+  Menu as MenuIcon,
+  Settings as SettingsIcon,
+} from "@suid/icons-material";
+
+
 import { revolt } from "../../../lib/revolt";
 import * as ReChat from "../../../lib/ReChat";
+
+import { Settings } from "../Settings";
 import ServerSidebar from "./Server";
 import ChannelSidebar from "./Channel";
 import { Menu } from "./Menu";
@@ -36,7 +43,7 @@ const Shell: Component = (props: any) => {
             ReChat
           </Typography>
           <IconButton onClick={() => ReChat.setShowSettings(true)}>
-            <Settings />
+            <SettingsIcon />
           </IconButton>
           <IconButton>
             <Avatar
@@ -56,6 +63,7 @@ const Shell: Component = (props: any) => {
 
       <ServerSidebar />
       <ChannelSidebar />
+      <Settings />
       <Menu />
 
       {/* Shell's Nested Children */}

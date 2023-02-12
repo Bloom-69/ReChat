@@ -8,7 +8,6 @@ import { Shell } from "./components/client/Shell";
 import Home from "./components/client/Home";
 import { MessageBox } from "./components/client/Messages/MessageBox";
 import { MessageContainer } from "./components/client/Messages/MessageContainer";
-import { Settings } from "./components/client/Settings";
 
 function App() {
   return (
@@ -36,7 +35,6 @@ function App() {
               )}
             </div>
           </Shell>
-          <Settings />
         </>
       )}
     </main>

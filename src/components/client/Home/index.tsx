@@ -9,13 +9,12 @@ import {
   Grid,
   Typography,
 } from "@suid/material";
-import { Markdown } from "../../markdown";
 
 export default function Home() {
   return (
     <Container>
       <Card variant="outlined" sx={{ border: "none" }}>
-        <CardMedia component="img" image="/src/assets/Logo.svg" />
+        <CardMedia component="img" image="/Logo.svg" />
         <CardContent sx={{ textAlign: 'center'}}>
             <Typography>
                 Select any Server to start chatting

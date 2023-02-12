@@ -64,7 +64,7 @@ const Login: Component<Login> = ({
               "margin-left": "auto",
               "margin-right": "auto",
             }}
-            src="/src/assets/Logo.svg"
+            src="/Logo.svg"
           >
           </img>
           <form

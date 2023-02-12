@@ -33,7 +33,6 @@ import {
 } from "@suid/icons-material";
 
 import { Component, createSignal, JSXElement, Match, Switch } from "solid-js";
-import { Portal } from "solid-js/web";
 
 import * as ReChat from "../../../lib/ReChat";
 import { Index } from "unist-util-visit";
@@ -72,7 +71,6 @@ const [Tab, setTab] = createSignal<Index>(0);
 
 const Settings: Component = () => {
   return (
-    <Portal>
       <Dialog
         fullScreen
         open={ReChat.showSettings()}
@@ -204,7 +202,6 @@ const Settings: Component = () => {
           </Match>
         </Switch>
       </Dialog>
-    </Portal>
   );
 };
 

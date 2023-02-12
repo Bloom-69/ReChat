@@ -39,19 +39,27 @@ const Shell: Component = (props: any) => {
             <Settings />
           </IconButton>
           <IconButton>
-            <Avatar src="./broken.png" alt={revolt.user.username} />
+            <Avatar
+              src={revolt.user.generateAvatarURL() ||
+                revolt.user.defaultAvatarURL}
+              alt={revolt.user.username}
+              onClick={(event) => {
+                ReChat.setShowMenu(true);
+                ReChat.setAnchorEl(event.currentTarget);
+              }}
+            />
           </IconButton>
         </Toolbar>
       </AppBar>
 
       {/* Shell Components */}
-      
+
       <ServerSidebar />
       <ChannelSidebar />
-      <Menu/>
-      
+      <Menu />
+
       {/* Shell's Nested Children */}
-      
+
       {props.children}
     </div>
   );

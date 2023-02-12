@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Roboto Regular', sans-serif;
+    src: url('./Roboto\ regular.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto Italic', sans-serif;
+    src: url('./Roboto\ italic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto 900', sans-serif;
+    src: url('./Roboto\ 900.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto 900 Italic', sans-serif;
+    src: url('./Roboto\ 900italic.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto Mono', sans-serif;
+    src: url('./Roboto\ Mono\ regular.ttf');
+}

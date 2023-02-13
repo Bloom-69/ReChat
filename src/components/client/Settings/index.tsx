@@ -233,10 +233,10 @@ const Settings: Component = () => {
                   secondary="Enable GifBox support (Requires Emoji Picker enabled)"
                 />
                 <SwitchMUI
-                  value={ReChat.settings.experiments.picker}
-                  checked={ReChat.settings.experiments.picker}
+                  value={ReChat.settings.experiments.gifbox}
+                  checked={ReChat.settings.experiments.gifbox}
                   onChange={() => {
-                    ReChat.settings.experiments.picker
+                    ReChat.settings.experiments.gifbox
                       ? ReChat.setSettings("experiments", "gifbox", false)
                       : ReChat.setSettings("experiments", "gifbox", true);
                   }}

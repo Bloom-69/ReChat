@@ -1,12 +1,20 @@
-import { createSignal} from "solid-js";
+import { createSignal } from "solid-js";
 import * as ReChat from "../../../../lib/ReChat";
 import { ulid } from "ulid";
 
 import { revolt } from "../../../../lib/revolt";
 
 import type { Component } from "solid-js";
-import { FormControl, IconButton, TextField, Toolbar } from "@suid/material";
-import { Send } from "@suid/icons-material";
+import {
+  FormControl,
+  IconButton,
+  Paper,
+  TextField,
+  Toolbar,
+} from "@suid/material";
+import { Face, Send } from "@suid/icons-material";
+
+import background from "@suid/material/colors";
 
 const [sending, setSending] = createSignal<boolean>(false);
 
@@ -43,18 +51,41 @@ async function getStatus() {
 
 const MessageBox: Component = () => {
   return (
-    <Toolbar sx={{position: 'sticky', bottom: 0, zIndex: 100, background: '#f5f5f5'}}>
-      <FormControl fullWidth sx={{marginRight: 1}}>
-        <TextField variant="outlined" size="small" sx={{width: 'auto'}} value={ReChat.newMessage()} placeholder="Type Anything..." onChange={(e:any) => ReChat.setNewMessage(e.currentTarget.value)}/>
-      </FormControl>
-      <IconButton
+    <Paper
+      variant="outlined"
+      sx={{ position: "sticky", bottom: 0, zIndex: 100, borderRadius: 0 }}
+    >
+      <Toolbar>
+        <FormControl fullWidth sx={{ marginRight: 1 }}>
+          <TextField
+            variant="standard"
+            size="small"
+            sx={{ width: "auto" }}
+            value={ReChat.newMessage()}
+            placeholder="Type Anything..."
+            onChange={(e: any) => ReChat.setNewMessage(e.currentTarget.value)}
+          />
+        </FormControl>
+        {ReChat.settings.experiments.picker && (
+          <IconButton
+            aria-label="Emoji"
+            onClick={(event) => {
+              ReChat.setShowPicker(true);
+              ReChat.setAnchorPicker(event.currentTarget);
+            }}
+          >
+            <Face />
+          </IconButton>
+        )}
+        <IconButton
           aria-label="Send"
           disabled={sending()}
           onClick={() => sendMessage(ReChat.newMessage())}
         >
           <Send />
         </IconButton>
-    </Toolbar>
+      </Toolbar>
+    </Paper>
   );
 };
 

@@ -8,6 +8,7 @@ import { Shell } from "./components/client/Shell";
 import Home from "./components/client/Home";
 import { MessageBox } from "./components/client/Messages/MessageBox";
 import { MessageContainer } from "./components/client/Messages/MessageContainer";
+import { Picker } from "./components/experiments/EmojiPicker";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               {ReChat.servers.current_channel && (
                 <>
                   <MessageContainer />
+                  <Picker setMessage={ReChat.setMessages} message={ReChat.messages} type="emoji"/>
                   <MessageBox />
                 </>
               )}

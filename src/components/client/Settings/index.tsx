@@ -1,4 +1,5 @@
 import {
+  Alert,
   AppBar,
   Card,
   CardContent,
@@ -26,9 +27,12 @@ import {
   ArrowBack,
   CheckBox,
   Close as CloseIcon,
+  Face,
+  GifBox,
   Image,
   Info,
   Person,
+  Science,
   Tune,
 } from "@suid/icons-material";
 
@@ -130,6 +134,17 @@ const Settings: Component = () => {
               <ListItem>
                 <ListItemButton onClick={() => setTab(2)}>
                   <ListItemIcon>
+                    <Science/>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Experiments"
+                    secondary="Experimental Features"
+                  />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton onClick={() => setTab(3)}>
+                  <ListItemIcon>
                     <Info />
                   </ListItemIcon>
                   <ListItemText
@@ -189,6 +204,47 @@ const Settings: Component = () => {
             </List>
           </Match>
           <Match when={Tab() === 2}>
+            <Alert severity="warning">Some Experiments can cause ReChat more unstable (I think it will be """"""stable"""""")</Alert>
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <Face/>
+                </ListItemIcon>
+                <ListItemText
+                  primary="Emoji Picker"
+                  secondary="Enable emoji picker (Early Work in Progress)"
+                />
+                <SwitchMUI
+                  value={ReChat.settings.experiments.picker}
+                  checked={ReChat.settings.experiments.picker}
+                  onChange={() => {
+                    ReChat.settings.experiments.picker
+                      ? ReChat.setSettings("experiments", "picker", false)
+                      : ReChat.setSettings("experiments", "picker", true);
+                  }}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <GifBox />
+                </ListItemIcon>
+                <ListItemText
+                  primary="GifBox"
+                  secondary="Enable GifBox support (Requires Emoji Picker enabled)"
+                />
+                <SwitchMUI
+                  value={ReChat.settings.experiments.picker}
+                  checked={ReChat.settings.experiments.picker}
+                  onChange={() => {
+                    ReChat.settings.experiments.picker
+                      ? ReChat.setSettings("experiments", "gifbox", false)
+                      : ReChat.setSettings("experiments", "gifbox", true);
+                  }}
+                />
+              </ListItem>
+            </List>
+          </Match>
+          <Match when={Tab() === 3}>
             <Container sx={{marginTop: 1}}>
                 <Card>
                     <CardHeader title="ReChat" subheader="Version 0.0.1" />

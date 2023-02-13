@@ -7,6 +7,7 @@ specifiers:
   comma-separated-tokens: ^2.0.3
   dayjs: ^1.11.7
   emoji-regex: ^10.2.1
+  gifbox.js: ^0.9.0
   hast: ^1.0.0
   mdast-util-to-hast: ^12.3.0
   property-information: ^6.2.0
@@ -40,6 +41,7 @@ dependencies:
   comma-separated-tokens: 2.0.3
   dayjs: 1.11.7
   emoji-regex: 10.2.1
+  gifbox.js: 0.9.0
   hast: 1.0.0
   mdast-util-to-hast: 12.3.0
   property-information: 6.2.0
@@ -821,6 +823,14 @@ packages:
       - debug
     dev: false
 
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios/0.26.1:
     resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
@@ -1079,6 +1089,15 @@ packages:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
     dev: true
+
+  /gifbox.js/0.9.0:
+    resolution: {integrity: sha512-OrsEga4yXQ/eZE+XZGPproj8vYoAi5+hLjCZqM0uawy6Sk7zC31dzhAY8PgmuPl4sIz5IuyTxgYZXIpUKhK7nQ==}
+    dependencies:
+      axios: 0.24.0
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /globals/11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}

@@ -52,6 +52,7 @@ declare interface settings {
     emoji: "mutant" | "twemoji" | "fluent-3d" | string;
     experiments: {
         picker: boolean,
+        gifbox: boolean,
         compact: boolean,
         nick: boolean,
         edited_format: "ISO" | "UTC" | "default" | string,

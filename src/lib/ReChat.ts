@@ -48,6 +48,7 @@ export const [settings, setSettings] = createLocalStore<config>("settings", {
   debug: false,
   emoji: "mutant",
   experiments: {
+    gifbox: false,
     picker: false,
     compact: false,
     nick: false,
@@ -61,7 +62,12 @@ export const [statuslist, setStatusList] = createLocalSignal<status[]>(
   []
 );
 // Experimental Emoji Picker
+
 export const [showPicker, setShowPicker] = createSignal<boolean>(false);
+
+export const [showGifBox, setShowGifBox] = createSignal<boolean>(false);
+
+export const [anchorPicker, setAnchorPicker] = createSignal<null | HTMLElement>(null);
 
 // ReChat Components
 
@@ -76,3 +82,4 @@ export const [showMenu, setShowMenu] = createSignal<boolean>(false);
 // Menu Anchor
 
 export const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);
+

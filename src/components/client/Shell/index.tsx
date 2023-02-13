@@ -21,6 +21,7 @@ import { Settings } from "../Settings";
 import ServerSidebar from "./Server";
 import ChannelSidebar from "./Channel";
 import { Menu } from "./Menu";
+import { Markdown } from "../../markdown";
 
 const Shell: Component = (props: any) => {
   return (
@@ -40,7 +41,7 @@ const Shell: Component = (props: any) => {
             color="inherit"
             component="div"
           >
-            {ReChat.servers.current_channel?.name || "ReChat"}
+            <Markdown content={ReChat.servers.current_channel?.name || "ReChat"} />
           </Typography>
           <IconButton onClick={() => ReChat.setShowSettings(true)}>
             <SettingsIcon />

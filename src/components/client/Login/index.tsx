@@ -1,5 +1,8 @@
 import {
+  Alert,
+  Breadcrumbs,
   Button,
+  ButtonGroup,
   CircularProgress,
   Container,
   FormControl,
@@ -67,6 +70,9 @@ const Login: Component<Login> = ({
             src="/Logo.svg"
           >
           </img>
+          <Alert severity="warning" sx={{ my: 1 }}>
+            This client is currently in Beta. Some features may change overtime
+          </Alert>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -100,9 +106,16 @@ const Login: Component<Login> = ({
                 onChange={(e) =>
                   setPassword(e.currentTarget.value)}
               />
-              <Button disabled={loading()} type="submit">Login</Button>
+              <ButtonGroup fullWidth>
+                <Button disabled={loading()} type="submit">Login</Button>
+                <Button disabled={true}>Login with Token (Coming Soon)</Button>
+              </ButtonGroup>
             </FormControl>
           </form>
+
+          <Breadcrumbs sx={{fontSize: 10, my:2}}>
+            {window.navigator.userAgent}
+          </Breadcrumbs>
         </Container>
       )}
     </>

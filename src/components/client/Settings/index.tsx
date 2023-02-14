@@ -18,22 +18,27 @@ import {
   Select,
   Slide,
   Switch as SwitchMUI,
+  TextField,
   Toolbar,
   Typography,
 } from "@suid/material";
 import { TransitionProps } from "@suid/material/transitions/transition";
 
 import {
+  Apps,
   ArrowBack,
-  CheckBox,
+  Circle,
   Close as CloseIcon,
+  DarkMode,
   Face,
+  FormatPaint,
   GifBox,
   Image,
   Info,
   Person,
   Science,
   Tune,
+  Window,
 } from "@suid/icons-material";
 
 import { Component, createSignal, JSXElement, Match, Switch } from "solid-js";
@@ -41,6 +46,7 @@ import { Component, createSignal, JSXElement, Match, Switch } from "solid-js";
 import * as ReChat from "../../../lib/ReChat";
 import { Index } from "unist-util-visit";
 import { revolt } from "../../../lib/revolt";
+import { blue, green } from "@suid/material/colors";
 
 const Transition = function Transition(
   props: TransitionProps & {
@@ -75,189 +81,346 @@ const [Tab, setTab] = createSignal<Index>(0);
 
 const Settings: Component = () => {
   return (
-      <Dialog
-        fullScreen
-        open={ReChat.showSettings()}
-        onClose={() => ReChat.setShowSettings(false)}
-        TransitionComponent={Transition}
+    <Dialog
+      fullScreen
+      open={ReChat.showSettings()}
+      onClose={() => ReChat.setShowSettings(false)}
+      TransitionComponent={Transition}
+    >
+      <AppBar
+        variant={ReChat.settings.appearance.appbar_vairant}
+        position="static"
+        sx={{ position: "relative" }}
       >
-        <AppBar variant="outlined" position="static" sx={{ position: "relative" }}>
-          <Toolbar>
-            <Switch>
-              <Match when={Tab() === 0}>
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  onClick={() => ReChat.setShowSettings(false)}
-                  aria-label="close"
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Match>
-              <Match when={Tab() !== 0}>
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  onClick={() => setTab(0)}
-                  aria-label="close"
-                >
-                  <ArrowBack />
-                </IconButton>
-              </Match>
-            </Switch>
-            <Typography
-              sx={{
-                ml: 2,
-                flex: 1,
-              }}
-              variant="h6"
-              component="div"
-            >
-              Settings
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Switch>
-          <Match when={Tab() === 0}>
-            <List>
-              <ListItem>
-                <ListItemButton onClick={() => setTab(1)}>
-                  <ListItemIcon>
-                    <Tune />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="ReChat Settings"
-                    secondary="Client Settings"
-                  />
-                </ListItemButton>
-              </ListItem>
+        <Toolbar>
+          <Switch>
+            <Match when={Tab() === 0}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={() => ReChat.setShowSettings(false)}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </Match>
+            <Match when={Tab() !== 0}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={() => setTab(0)}
+                aria-label="close"
+              >
+                <ArrowBack />
+              </IconButton>
+            </Match>
+          </Switch>
+          <Typography
+            sx={{
+              ml: 2,
+              flex: 1,
+            }}
+            variant="h6"
+            component="div"
+          >
+            Settings
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Switch>
+        <Match when={Tab() === 0}>
+          <List>
+            <ListItem>
+              <ListItemButton onClick={() => setTab(1)}>
+                <ListItemIcon>
+                  <Tune />
+                </ListItemIcon>
+                <ListItemText
+                  primary="ReChat Settings"
+                  secondary="Client Settings"
+                />
+              </ListItemButton>
+            </ListItem>
+            {ReChat.settings.experiments.app_appearance && (
               <ListItem>
                 <ListItemButton onClick={() => setTab(2)}>
                   <ListItemIcon>
-                    <Science/>
+                    <FormatPaint />
                   </ListItemIcon>
                   <ListItemText
-                    primary="Experiments"
-                    secondary="Experimental Features"
+                    primary="Appearance"
+                    secondary="Customize ReChat"
                   />
                 </ListItemButton>
               </ListItem>
-              <ListItem>
-                <ListItemButton onClick={() => setTab(3)}>
+            )}
+            <ListItem>
+              <ListItemButton onClick={() => setTab(3)}>
+                <ListItemIcon>
+                  <Science />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Experiments"
+                  secondary="Experimental Features"
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => setTab(4)}>
+                <ListItemIcon>
+                  <Info />
+                </ListItemIcon>
+                <ListItemText
+                  primary="About ReChat"
+                  secondary="Information about ReChat"
+                />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Match>
+        <Match when={Tab() === 1}>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <Image />
+              </ListItemIcon>
+              <ListItemText
+                primary="Show Attachments"
+                secondary="Shows attachments like Images, Video and Audio.  Disabling Attachments might save bandwitdh, useful when mobile data"
+              />
+              <SwitchMUI
+                value={ReChat.settings.showMedia}
+                checked={ReChat.settings.showMedia}
+                onChange={() => {
+                  ReChat.settings.showMedia
+                    ? ReChat.setSettings("showMedia", false)
+                    : ReChat.setSettings("showMedia", true);
+                }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Person />
+              </ListItemIcon>
+              <ListItemText
+                primary="Status"
+                secondary="Change Status like Online, Focus, Busy, Idle and Offline"
+              />
+              <FormControl>
+                <Select
+                  variant="standard"
+                  id="rechat-status-select"
+                  value={ReChat.settings.status}
+                  onChange={(e) => {
+                    ReChat.setSettings("status", e.target.value);
+                    updateStatus(e.target.value);
+                  }}
+                >
+                  <MenuItem value="Online">Online</MenuItem>
+                  <MenuItem value="Focus">Focus</MenuItem>
+                  <MenuItem value="Busy">Busy</MenuItem>
+                  <MenuItem value="Idle">Idle</MenuItem>
+                  <MenuItem value="Offline">Offline</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+          </List>
+        </Match>
+        {ReChat.settings.experiments.app_appearance &&
+          (
+            <Match when={Tab() === 2}>
+              <Alert severity="warning">
+                Chaging Colors and some component requires client restart
+              </Alert>
+              <List>
+                <ListItem>
                   <ListItemIcon>
-                    <Info />
+                    <Circle
+                      sx={{ color: ReChat.settings.appearance.primary_color }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Primary Color" />
+                  <TextField
+                    variant="standard"
+                    value={ReChat.settings.appearance.primary_color}
+                    onChange={(e) =>
+                      ReChat.setSettings(
+                        "appearance",
+                        "primary_color",
+                        e.target.value,
+                      )}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <Circle
+                      sx={{ color: ReChat.settings.appearance.secondary_color }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Secondary Color" />
+                  <TextField
+                    variant="standard"
+                    value={ReChat.settings.appearance.secondary_color}
+                    onChange={(e) =>
+                      ReChat.setSettings(
+                        "appearance",
+                        "secondary_color",
+                        e.target.value,
+                      )}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemButton disabled>
+                    <ListItemIcon>
+                      <Circle
+                        sx={{
+                          color:
+                            `linear-gradient(to right bottom, ${blue}, ${green})`,
+                        }}
+                      >
+                      </Circle>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="More Colors"
+                      secondary="Coming soon..."
+                    />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <Apps />
+                  </ListItemIcon>
+                  <ListItemText primary="AppBar Variants" />
+                  <FormControl>
+                    <Select
+                      variant="standard"
+                      id="rechat-appbar_variant-select"
+                      value={ReChat.settings.appearance.appbar_vairant}
+                      onChange={(e) => {
+                        ReChat.setSettings(
+                          "appearance",
+                          "appbar_vairant",
+                          e.target.value,
+                        );
+                      }}
+                    >
+                      <MenuItem value="elevation">Elevation</MenuItem>
+                      <MenuItem value="outlined">Outlined</MenuItem>
+                    </Select>
+                  </FormControl>
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon>
+                    <DarkMode />
                   </ListItemIcon>
                   <ListItemText
-                    primary="About ReChat"
-                    secondary="Information about ReChat"
+                    primary="App Mode"
+                    secondary="Light Mode is the defualt, but Dark Mode is useful for your eyes when you have light off"
                   />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Match>
-          <Match when={Tab() === 1}>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <Image />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Show Attachments"
-                  secondary="Shows attachments like Images, Video and Audio.  Disabling Attachments might save bandwitdh, useful when mobile data"
-                />
-                <SwitchMUI
-                  value={ReChat.settings.showMedia}
-                  checked={ReChat.settings.showMedia}
-                  onChange={() => {
-                    ReChat.settings.showMedia
-                      ? ReChat.setSettings("showMedia", false)
-                      : ReChat.setSettings("showMedia", true);
-                  }}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <Person />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Status"
-                  secondary="Change Status like Online, Focus, Busy, Idle and Offline"
-                />
-                <FormControl>
-                  <Select
-                    variant="standard"
-                    id="rechat-status-select"
-                    value={ReChat.settings.status}
-                    onChange={(e) => {
-                      ReChat.setSettings("status", e.target.value);
-                      updateStatus(e.target.value);
-                    }}
-                  >
-                    <MenuItem value="Online">Online</MenuItem>
-                    <MenuItem value="Focus">Focus</MenuItem>
-                    <MenuItem value="Busy">Busy</MenuItem>
-                    <MenuItem value="Idle">Idle</MenuItem>
-                    <MenuItem value="Offline">Offline</MenuItem>
-                  </Select>
-                </FormControl>
-              </ListItem>
-            </List>
-          </Match>
-          <Match when={Tab() === 2}>
-            <Alert severity="warning">Some Experiments can cause ReChat more unstable (I think it will be """"""stable"""""")</Alert>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <Face/>
-                </ListItemIcon>
-                <ListItemText
-                  primary="Emoji Picker"
-                  secondary="Enable emoji picker (Early Work in Progress)"
-                />
-                <SwitchMUI
-                  value={ReChat.settings.experiments.picker}
-                  checked={ReChat.settings.experiments.picker}
-                  onChange={() => {
-                    ReChat.settings.experiments.picker
-                      ? ReChat.setSettings("experiments", "picker", false)
-                      : ReChat.setSettings("experiments", "picker", true);
-                  }}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <GifBox />
-                </ListItemIcon>
-                <ListItemText
-                  primary="GifBox"
-                  secondary="Enable GifBox support (Requires Emoji Picker enabled)"
-                />
-                <SwitchMUI
-                  value={ReChat.settings.experiments.gifbox}
-                  checked={ReChat.settings.experiments.gifbox}
-                  onChange={() => {
-                    ReChat.settings.experiments.gifbox
-                      ? ReChat.setSettings("experiments", "gifbox", false)
-                      : ReChat.setSettings("experiments", "gifbox", true);
-                  }}
-                />
-              </ListItem>
-            </List>
-          </Match>
-          <Match when={Tab() === 3}>
-            <Container sx={{marginTop: 1}}>
-                <Card>
-                    <CardHeader title="ReChat" subheader="Version 0.0.1" />
-                    <CardContent>
-                        <p>Made by Bloom#9014 (@Bloom in revolt)</p>
+                  <FormControl>
+                    <Select
+                      variant="standard"
+                      id="rechat-appbar_variant-select"
+                      value={ReChat.settings.appearance.app_mode}
+                      onChange={(e) => {
+                        ReChat.setSettings(
+                          "appearance",
+                          "app_mode",
+                          e.target.value,
+                        );
+                      }}
+                    >
+                      <MenuItem value="light">Light</MenuItem>
+                      <MenuItem value="dark">Dark</MenuItem>
+                    </Select>
+                  </FormControl>
+                </ListItem>
+              </List>
+            </Match>
+          )}
+        <Match when={Tab() === 3}>
+          <Alert severity="warning">
+            Some Experiments can cause ReChat more unstable (I think it will be
+            """"""stable"""""")
+          </Alert>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <Face />
+              </ListItemIcon>
+              <ListItemText
+                primary="Emoji Picker"
+                secondary="Enable emoji picker (Early Work in Progress)"
+              />
+              <SwitchMUI
+                value={ReChat.settings.experiments.picker}
+                checked={ReChat.settings.experiments.picker}
+                onChange={() => {
+                  ReChat.settings.experiments.picker
+                    ? ReChat.setSettings("experiments", "picker", false)
+                    : ReChat.setSettings("experiments", "picker", true);
+                }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <GifBox />
+              </ListItemIcon>
+              <ListItemText
+                primary="GifBox"
+                secondary="Enable GifBox support (Requires Emoji Picker enabled)"
+              />
+              <SwitchMUI
+                value={ReChat.settings.experiments.gifbox}
+                checked={ReChat.settings.experiments.gifbox}
+                onChange={() => {
+                  ReChat.settings.experiments.gifbox
+                    ? ReChat.setSettings("experiments", "gifbox", false)
+                    : ReChat.setSettings("experiments", "gifbox", true);
+                }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Window />
+              </ListItemIcon>
+              <ListItemText
+                primary="Apperance"
+                secondary="Customize your client (WIP)"
+              />
+              <SwitchMUI
+                value={ReChat.settings.experiments.app_appearance}
+                checked={ReChat.settings.experiments.app_appearance}
+                onChange={() => {
+                  ReChat.settings.experiments.app_appearance
+                    ? ReChat.setSettings("experiments", "app_appearance", false)
+                    : ReChat.setSettings("experiments", "app_appearance", true);
+                }}
+              />
+            </ListItem>
+          </List>
+        </Match>
+        <Match when={Tab() === 4}>
+          <Container sx={{ marginTop: 1 }}>
+            <Card>
+              <CardHeader title="ReChat" subheader="Version 0.0.2" />
+              <CardContent>
+                <p>Made by Bloom#9014 (@Bloom in revolt)</p>
 
-                        <p>This client was made using Solidjs and SUID (Material UI ported into Solidjs)</p>
-                    </CardContent>
-                </Card>
-            </Container>
-          </Match>
-        </Switch>
-      </Dialog>
+                <p>
+                  This client was made using Solidjs and SUID (Material UI
+                  ported into Solidjs)
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Browser Information" />
+              <p>{window.navigator.userAgent}</p>
+            </Card>
+          </Container>
+        </Match>
+      </Switch>
+    </Dialog>
   );
 };
 

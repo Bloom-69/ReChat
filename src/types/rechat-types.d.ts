@@ -56,6 +56,14 @@ declare interface settings {
         compact: boolean,
         nick: boolean,
         edited_format: "ISO" | "UTC" | "default" | string,
-        disappear: boolean
+        disappear: boolean,
+        app_appearance: boolean,
+    }
+
+    appearance: {
+        app_mode: "light" | "dark";
+        primary_color: string | undefined;
+        secondary_color: string | undefined;
+        appbar_vairant: "outlined" | "elevation" | undefined
     }
 }

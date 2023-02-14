@@ -9,9 +9,27 @@ import Home from "./components/client/Home";
 import { MessageBox } from "./components/client/Messages/MessageBox";
 import { MessageContainer } from "./components/client/Messages/MessageContainer";
 import { Picker } from "./components/experiments/EmojiPicker";
+import { createTheme, ThemeProvider } from "@suid/material";
 
+const theme = createTheme({
+  palette: {
+
+    mode: `${ReChat.settings.appearance.app_mode}`,
+
+    primary: {
+      main: `${ReChat.settings.appearance.primary_color}`,
+    },
+    secondary: {
+      main: `${ReChat.settings.appearance.secondary_color}`,
+    },
+  },
+});
+
+
+//@ts-ignore
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <main>
       <Login
         client={client}
@@ -40,6 +58,7 @@ function App() {
         </>
       )}
     </main>
+    </ThemeProvider>
   );
 }
 

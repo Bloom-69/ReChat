@@ -21,14 +21,14 @@ import { Settings } from "../Settings";
 import ServerSidebar from "./Server";
 import ChannelSidebar from "./Channel";
 import { Menu } from "./Menu";
-import { Markdown } from "../../markdown";
 
 const Shell: Component = (props: any) => {
   return (
     <div>
-      <AppBar position="sticky" variant="outlined" color="inherit">
+      <AppBar position="sticky" variant={ReChat.settings.appearance.appbar_vairant}>
         <Toolbar variant="dense">
           <IconButton
+            color="inherit"
             onClick={() => {
               ReChat.setShowServerSidebar(true);
             }}
@@ -41,9 +41,9 @@ const Shell: Component = (props: any) => {
             color="inherit"
             component="div"
           >
-            <Markdown content={ReChat.servers.current_channel?.name || "ReChat"} />
+            {ReChat.servers.current_channel?.name || "ReChat"}
           </Typography>
-          <IconButton onClick={() => ReChat.setShowSettings(true)}>
+          <IconButton color="inherit" onClick={() => ReChat.setShowSettings(true)}>
             <SettingsIcon />
           </IconButton>
           <IconButton>

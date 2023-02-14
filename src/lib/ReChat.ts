@@ -54,7 +54,15 @@ export const [settings, setSettings] = createLocalStore<config>("settings", {
     nick: false,
     edited_format: "default",
     disappear: false,
+    app_appearance: false,
   },
+
+  appearance: {
+    app_mode: "light",
+    primary_color: "#2196f3",
+    secondary_color: "#d500f9",
+    appbar_vairant: "outlined",
+  }
 });
 
 export const [statuslist, setStatusList] = createLocalSignal<status[]>(
@@ -82,4 +90,3 @@ export const [showMenu, setShowMenu] = createSignal<boolean>(false);
 // Menu Anchor
 
 export const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);
-

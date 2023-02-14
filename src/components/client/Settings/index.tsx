@@ -41,7 +41,14 @@ import {
   Window,
 } from "@suid/icons-material";
 
-import { Component, createSignal, JSXElement, Match, Switch } from "solid-js";
+import {
+  Component,
+  createSignal,
+  JSXElement,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
 
 import * as ReChat from "../../../lib/ReChat";
 import { Index } from "unist-util-visit";
@@ -270,12 +277,30 @@ const Settings: Component = () => {
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemButton disabled>
+                  <ListItemIcon>
+                    <Circle
+                      sx={{ color: ReChat.settings.appearance.app_background }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Background Color" />
+                  <TextField
+                    variant="standard"
+                    value={ReChat.settings.appearance.app_background}
+                    onChange={(e) =>
+                      ReChat.setSettings(
+                        "appearance",
+                        "app_background",
+                        e.target.value,
+                      )}
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemButton>
                     <ListItemIcon>
                       <Circle
                         sx={{
                           color:
-                            `linear-gradient(to right bottom, ${blue}, ${green})`,
+                            `linear-gradient(to right bottom, #bbdefb , #e64a19 )`,
                         }}
                       >
                       </Circle>
@@ -306,32 +331,6 @@ const Settings: Component = () => {
                     >
                       <MenuItem value="elevation">Elevation</MenuItem>
                       <MenuItem value="outlined">Outlined</MenuItem>
-                    </Select>
-                  </FormControl>
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <DarkMode />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="App Mode"
-                    secondary="Light Mode is the defualt, but Dark Mode is useful for your eyes when you have light off"
-                  />
-                  <FormControl>
-                    <Select
-                      variant="standard"
-                      id="rechat-appbar_variant-select"
-                      value={ReChat.settings.appearance.app_mode}
-                      onChange={(e) => {
-                        ReChat.setSettings(
-                          "appearance",
-                          "app_mode",
-                          e.target.value,
-                        );
-                      }}
-                    >
-                      <MenuItem value="light">Light</MenuItem>
-                      <MenuItem value="dark">Dark</MenuItem>
                     </Select>
                   </FormControl>
                 </ListItem>
@@ -403,7 +402,12 @@ const Settings: Component = () => {
         <Match when={Tab() === 4}>
           <Container sx={{ marginTop: 1 }}>
             <Card>
-              <CardHeader title="ReChat" subheader="Version 0.0.2" />
+              <Show when={window.location.hostname.includes(" ")}>
+                <CardHeader title="ReChat (Canary)" subheader="Version 0.0.2" />
+              </Show>
+              <Show when={window.location.hostname.includes("localhost")}>
+                <CardHeader title="ReChat (Dev)" subheader="Version 0.0.2" />
+              </Show>
               <CardContent>
                 <p>Made by Bloom#9014 (@Bloom in revolt)</p>
 
@@ -415,7 +419,9 @@ const Settings: Component = () => {
             </Card>
             <Card>
               <CardHeader title="Browser Information" />
-              <p>{window.navigator.userAgent}</p>
+              <CardContent>
+                <code>User Agent: {window.navigator.userAgent}</code>
+              </CardContent>
             </Card>
           </Container>
         </Match>

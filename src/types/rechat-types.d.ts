@@ -61,9 +61,9 @@ declare interface settings {
     }
 
     appearance: {
-        app_mode: "light" | "dark";
         primary_color: string | undefined;
         secondary_color: string | undefined;
+        app_background: string | undefined;
         appbar_vairant: "outlined" | "elevation" | undefined
     }
 }

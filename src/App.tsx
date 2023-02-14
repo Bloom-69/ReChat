@@ -14,13 +14,15 @@ import { createTheme, ThemeProvider } from "@suid/material";
 const theme = createTheme({
   palette: {
 
-    mode: `${ReChat.settings.appearance.app_mode}`,
-
     primary: {
       main: `${ReChat.settings.appearance.primary_color}`,
     },
     secondary: {
       main: `${ReChat.settings.appearance.secondary_color}`,
+    },
+
+    background: {
+      default: `${ReChat.settings.appearance.app_background}`,
     },
   },
 });

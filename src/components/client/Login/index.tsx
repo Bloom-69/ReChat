@@ -107,8 +107,8 @@ const Login: Component<Login> = ({
                   setPassword(e.currentTarget.value)}
               />
               <ButtonGroup fullWidth>
-                <Button disabled={loading()} type="submit">Login</Button>
-                <Button disabled={true}>Login with Token (Coming Soon)</Button>
+                <Button variant="contained" disabled={loading()} type="submit">Login</Button>
+                <Button variant="contained" disabled={true}>Login with Token (Coming Soon)</Button>
               </ButtonGroup>
             </FormControl>
           </form>

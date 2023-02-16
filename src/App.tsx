@@ -37,7 +37,7 @@ function App() {
   let bottomRef: Ref<any>;
   return (
     <>
-      <Show when={window.location.hostname.includes(" ")}>
+      <Show when={window.location.hostname.includes('rechat-client.vercel.app')}>
         <ThemeProvider theme={theme}>
           <main>
             <Login
@@ -74,7 +74,7 @@ function App() {
           </main>
         </ThemeProvider>
       </Show>
-      <Show when={window.location.hostname.includes("localhost")}>
+      <Show when={window.location.hostname.includes('localhost')}>
         <ThemeProvider theme={themeCanary}>
           <main>
             <Login

@@ -73,6 +73,9 @@ const Login: Component<Login> = ({
           <Alert severity="warning" sx={{ my: 1 }}>
             This client is currently in Beta. Some features may change overtime
           </Alert>
+          <Alert severity="info" sx={{ my: 1 }}>
+            Localhost may works the best than normal
+          </Alert>
           <form
             onSubmit={async (e) => {
               e.preventDefault();

@@ -29,7 +29,6 @@ import {
   ArrowBack,
   Circle,
   Close as CloseIcon,
-  DarkMode,
   Face,
   FormatPaint,
   GifBox,
@@ -53,7 +52,6 @@ import {
 import * as ReChat from "../../../lib/ReChat";
 import { Index } from "unist-util-visit";
 import { revolt } from "../../../lib/revolt";
-import { blue, green } from "@suid/material/colors";
 
 const Transition = function Transition(
   props: TransitionProps & {
@@ -87,6 +85,7 @@ function updateStatus(
 const [Tab, setTab] = createSignal<Index>(0);
 
 const Settings: Component = () => {
+
   return (
     <Dialog
       fullScreen
@@ -409,6 +408,16 @@ const Settings: Component = () => {
               <CardHeader title="Browser Information" />
               <CardContent>
                 <code>User Agent: {window.navigator.userAgent}</code>
+              </CardContent>
+            </Card>
+            <Card sx={{marginTop: 1}}>
+              <CardHeader title="System Information" />
+              <CardContent>
+                <code>Platform: {window.navigator.platform}</code>
+                {" "}
+                <code>Vendor: {window.navigator.vendor}</code>
+                {" "}
+                <code>Product: {window.navigator.product}</code>
               </CardContent>
             </Card>
           </Container>

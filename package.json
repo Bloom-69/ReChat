@@ -39,6 +39,7 @@
     "solid-styled-components": "^0.28.5",
     "space-separated-tokens": "^2.0.2",
     "style-to-object": "^0.4.1",
+    "systeminformation": "^5.17.9",
     "ulid": "^2.3.0",
     "unified": "^10.1.2",
     "unist": "^8.0.11",

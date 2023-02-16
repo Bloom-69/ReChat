@@ -1,6 +1,6 @@
 import { UserMessageBase } from "../MessageBase";
 import { For } from "solid-js"
-import { messages, servers, setMessages } from "../../../../lib/ReChat";
+import { messages, setMessages } from "../../../../lib/ReChat";
 
 import type { Component } from "solid-js";
 import { revolt } from "../../../../lib/revolt";

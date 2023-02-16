@@ -1,4 +1,4 @@
-import type { Component } from "solid-js";
+import { Ref, Show } from "solid-js";
 
 import { Login } from "./components/client/Login";
 
@@ -13,54 +13,105 @@ import { createTheme, ThemeProvider } from "@suid/material";
 
 const theme = createTheme({
   palette: {
-
     primary: {
       main: `${ReChat.settings.appearance.primary_color}`,
     },
     secondary: {
       main: `${ReChat.settings.appearance.secondary_color}`,
     },
+  },
+});
 
-    background: {
-      default: `${ReChat.settings.appearance.app_background}`,
+const themeCanary = createTheme({
+  palette: {
+    primary: {
+      main: "#fbc02d",
+    },
+    secondary: {
+      main: `${ReChat.settings.appearance.secondary_color}`,
     },
   },
 });
 
-
-//@ts-ignore
 function App() {
+  let bottomRef: Ref<any>;
   return (
-    <ThemeProvider theme={theme}>
-    <main>
-      <Login
-        client={client}
-        userSetter={ReChat.setUser}
-        logged={ReChat.loggedIn}
-        logSetter={ReChat.setLoggedIn}
-      />
-      {ReChat.loggedIn() && (
-        <>
-          <Shell>
-            {ReChat.servers.isHome && (
+    <>
+      <Show when={window.location.hostname.includes(" ")}>
+        <ThemeProvider theme={theme}>
+          <main>
+            <Login
+              client={client}
+              userSetter={ReChat.setUser}
+              logged={ReChat.loggedIn}
+              logSetter={ReChat.setLoggedIn}
+            />
+            {ReChat.loggedIn() && (
               <>
-                <Home />
+                <Shell>
+                  {ReChat.servers.isHome && (
+                    <>
+                      <Home />
+                    </>
+                  )}
+                  <div>
+                    {ReChat.servers.current_channel && (
+                      <>
+                        <div ref={bottomRef} />
+                        <MessageContainer />
+                        <Picker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
+                          type="emoji"
+                        />
+                        <MessageBox />
+                      </>
+                    )}
+                  </div>
+                </Shell>
               </>
             )}
-            <div>
-              {ReChat.servers.current_channel && (
-                <>
-                  <MessageContainer />
-                  <Picker setMessage={ReChat.setMessages} message={ReChat.messages} type="emoji"/>
-                  <MessageBox />
-                </>
-              )}
-            </div>
-          </Shell>
-        </>
-      )}
-    </main>
-    </ThemeProvider>
+          </main>
+        </ThemeProvider>
+      </Show>
+      <Show when={window.location.hostname.includes("localhost")}>
+        <ThemeProvider theme={themeCanary}>
+          <main>
+            <Login
+              client={client}
+              userSetter={ReChat.setUser}
+              logged={ReChat.loggedIn}
+              logSetter={ReChat.setLoggedIn}
+            />
+            {ReChat.loggedIn() && (
+              <>
+                <Shell>
+                  {ReChat.servers.isHome && (
+                    <>
+                      <Home />
+                    </>
+                  )}
+                  <div>
+                    {ReChat.servers.current_channel && (
+                      <>
+                        <div ref={bottomRef} />
+                        <MessageContainer />
+                        <Picker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
+                          type="emoji"
+                        />
+                        <MessageBox />
+                      </>
+                    )}
+                  </div>
+                </Shell>
+              </>
+            )}
+          </main>
+        </ThemeProvider>
+      </Show>
+    </>
   );
 }
 

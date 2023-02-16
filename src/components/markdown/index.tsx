@@ -97,8 +97,6 @@ const components = {
   blockquote: styled.blockquote`
     margin: 2px 0;
     padding: 2px 0;
-    border-radius: 6px;
-    background: #444;
     border-inline-start: 4px solid
       #ccc;
     > * {

@@ -32,7 +32,6 @@ export function RenderCustomEmoji({ match }: CustomComponentProps) {
       <Match when={exists()}>
         <Emoji
           loading="lazy"
-          class="w-5 h-5 block"
           draggable={false}
           src={url}
           onError={() => setExists(false)}

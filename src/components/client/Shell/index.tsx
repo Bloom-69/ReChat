@@ -1,9 +1,8 @@
-import { children, Component } from "solid-js";
+import { Component, Show } from "solid-js";
 
 import {
   AppBar,
   Avatar,
-  Container,
   IconButton,
   Toolbar,
   Typography,
@@ -12,7 +11,6 @@ import {
   Menu as MenuIcon,
   Settings as SettingsIcon,
 } from "@suid/icons-material";
-
 
 import { revolt } from "../../../lib/revolt";
 import * as ReChat from "../../../lib/ReChat";
@@ -25,7 +23,10 @@ import { Menu } from "./Menu";
 const Shell: Component = (props: any) => {
   return (
     <div>
-      <AppBar position="sticky" variant={ReChat.settings.appearance.appbar_vairant}>
+      <AppBar
+        position="sticky"
+        variant={ReChat.settings.appearance.appbar_vairant}
+      >
         <Toolbar variant="dense">
           <IconButton
             color="inherit"
@@ -35,15 +36,30 @@ const Shell: Component = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            sx={{ marginLeft: 1, flexGrow: 1 }}
-            variant="h6"
+          <Show when={window.location.hostname.includes(" ")}>
+            <Typography
+              sx={{ marginLeft: 1, flexGrow: 1 }}
+              variant="h6"
+              color="inherit"
+              component="div"
+            >
+              {ReChat.servers.current_channel?.name || "ReChat"}
+            </Typography>
+          </Show>
+          <Show when={window.location.hostname.includes("localhost")}>
+            <Typography
+              sx={{ marginLeft: 1, flexGrow: 1 }}
+              variant="h6"
+              color="inherit"
+              component="div"
+            >
+              {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
+            </Typography>
+          </Show>
+          <IconButton
             color="inherit"
-            component="div"
+            onClick={() => ReChat.setShowSettings(true)}
           >
-            {ReChat.servers.current_channel?.name || "ReChat"}
-          </Typography>
-          <IconButton color="inherit" onClick={() => ReChat.setShowSettings(true)}>
             <SettingsIcon />
           </IconButton>
           <IconButton>

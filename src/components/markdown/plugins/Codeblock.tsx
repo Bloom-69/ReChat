@@ -1,3 +1,4 @@
+import { Button } from "@suid/material";
 import { JSX } from "solid-js";
 import { styled } from "solid-styled-components";
 
@@ -8,33 +9,7 @@ const Base = styled.pre`
   color: inherit;
   padding: 1em;
   overflow-x: scroll;
-  border-radius: 6px;
-`;
-
-/**
- * Copy codeblock contents button styles
- */
-const Lang = styled.div`
-  width: fit-content;
-  padding-bottom: 8px;
-  font-family: "Jetbrains Mono", monospace;
-  a {
-    color: #070707;
-    cursor: pointer;
-    padding: 2px 6px;
-    font-weight: 600;
-    user-select: none;
-    display: inline-block;
-    background: #71d2ff;
-    font-size: 10px;
-    text-transform: uppercase;
-    box-shadow: 0 2px #4b6b75;
-    border-radius: 3px;
-    &:active {
-      transform: translateY(1px);
-      box-shadow: 0 1px #4b6b75;
-    }
-  }
+  border-radius: 4px;
 `;
 
 /**
@@ -52,21 +27,28 @@ export function RenderCodeblock(props: {
   let ref: HTMLPreElement | undefined;
 
   return (
-    <Base class="bg-base-200 text-neutral" ref={ref}>
-        <Lang>
-          <a
-            onClick={() => {
-              const text = ref?.querySelector("code")?.innerText;
-              //text && modalController.writeText(text);
-              alert(text);
-            }}
-            
-          >
-            {lang}
-          </a>
-        </Lang>
-      {props.children}
-    </Base>
+    <>
+      <Button
+        sx={{
+          display: "inline-block",
+          userSelect: "none",
+          width: "fit-content",
+          marginLeft: 2,
+        }}
+        onClick={() => {
+          const text = ref?.querySelector("code")?.innerText;
+          //text && modalController.writeText(text);
+          alert(text);
+        }}
+        variant="outlined"
+        size="small"
+      >
+        {lang}
+      </Button>
+      <Base class="bg-base-200 text-neutral" ref={ref}>
+        {props.children}
+      </Base>
+    </>
   );
 }
 
@@ -87,7 +69,7 @@ export function RenderCodeblock(props: {
         <Base ref={ref}>
             <Lang>
                 <Tooltip content="Copy to Clipboard" placement="top">
-                    
+
                     // @ts-expect-error Preact-React
                     <a onClick={onCopy}>{text}</a>
                 </Tooltip>

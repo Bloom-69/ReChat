@@ -240,24 +240,47 @@ const Settings: Component = () => {
                 Chaging Colors and some component requires client restart
               </Alert>
               <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <Circle
-                      sx={{ color: ReChat.settings.appearance.primary_color }}
+                <Show when={window.location.hostname.includes("localhost")}>
+                  <ListItem>
+                    <ListItemIcon>
+                      <Circle
+                        sx={{ color: ReChat.settings.appearance.primary_color }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Primary Color" secondary="Unavailable in Canary Version" />
+                    <TextField
+                      disabled
+                      variant="standard"
+                      value={ReChat.settings.appearance.primary_color}
+                      onChange={(e) =>
+                        ReChat.setSettings(
+                          "appearance",
+                          "primary_color",
+                          e.target.value,
+                        )}
                     />
-                  </ListItemIcon>
-                  <ListItemText primary="Primary Color" />
-                  <TextField
-                    variant="standard"
-                    value={ReChat.settings.appearance.primary_color}
-                    onChange={(e) =>
-                      ReChat.setSettings(
-                        "appearance",
-                        "primary_color",
-                        e.target.value,
-                      )}
-                  />
-                </ListItem>
+                  </ListItem>
+                </Show>
+                <Show when={window.location.hostname.includes(" ")}>
+                  <ListItem>
+                    <ListItemIcon>
+                      <Circle
+                        sx={{ color: ReChat.settings.appearance.primary_color }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Primary Color" />
+                    <TextField
+                      variant="standard"
+                      value={ReChat.settings.appearance.primary_color}
+                      onChange={(e) =>
+                        ReChat.setSettings(
+                          "appearance",
+                          "primary_color",
+                          e.target.value,
+                        )}
+                    />
+                  </ListItem>
+                </Show>
                 <ListItem>
                   <ListItemIcon>
                     <Circle
@@ -275,41 +298,6 @@ const Settings: Component = () => {
                         e.target.value,
                       )}
                   />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <Circle
-                      sx={{ color: ReChat.settings.appearance.app_background }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary="Background Color" />
-                  <TextField
-                    variant="standard"
-                    value={ReChat.settings.appearance.app_background}
-                    onChange={(e) =>
-                      ReChat.setSettings(
-                        "appearance",
-                        "app_background",
-                        e.target.value,
-                      )}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <Circle
-                        sx={{
-                          color:
-                            `linear-gradient(to right bottom, #bbdefb , #e64a19 )`,
-                        }}
-                      >
-                      </Circle>
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="More Colors"
-                      secondary="Coming soon..."
-                    />
-                  </ListItemButton>
                 </ListItem>
                 <ListItem>
                   <ListItemIcon>
@@ -403,10 +391,10 @@ const Settings: Component = () => {
           <Container sx={{ marginTop: 1 }}>
             <Card>
               <Show when={window.location.hostname.includes(" ")}>
-                <CardHeader title="ReChat (Canary)" subheader="Version 0.0.2" />
+                <CardHeader title="ReChat (Stable)" subheader="Version 0.0.2" />
               </Show>
               <Show when={window.location.hostname.includes("localhost")}>
-                <CardHeader title="ReChat (Dev)" subheader="Version 0.0.2" />
+                <CardHeader title="ReChat (Canary)" subheader="Version 0.0.3" />
               </Show>
               <CardContent>
                 <p>Made by Bloom#9014 (@Bloom in revolt)</p>

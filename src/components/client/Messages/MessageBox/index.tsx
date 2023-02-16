@@ -2,10 +2,10 @@ import { createSignal } from "solid-js";
 import * as ReChat from "../../../../lib/ReChat";
 import { ulid } from "ulid";
 
-import { revolt } from "../../../../lib/revolt";
 
 import type { Component } from "solid-js";
 import {
+  Button,
   FormControl,
   IconButton,
   Paper,
@@ -13,8 +13,6 @@ import {
   Toolbar,
 } from "@suid/material";
 import { Face, Send } from "@suid/icons-material";
-
-import background from "@suid/material/colors";
 
 const [sending, setSending] = createSignal<boolean>(false);
 
@@ -43,11 +41,7 @@ async function sendMessage(message: string) {
   }
 }
 
-async function getStatus() {
-  const userinfo = await revolt.api.get("/users/@me");
-  ReChat.setSettings("statusText", userinfo.status?.text);
-  ReChat.setSettings("status", userinfo.status?.presence);
-}
+
 
 const MessageBox: Component = () => {
   return (
@@ -58,6 +52,7 @@ const MessageBox: Component = () => {
       <Toolbar>
         <FormControl fullWidth sx={{ marginRight: 1 }}>
           <TextField
+            multiline
             variant="standard"
             size="small"
             sx={{ width: "auto" }}
@@ -77,13 +72,15 @@ const MessageBox: Component = () => {
             <Face />
           </IconButton>
         )}
-        <IconButton
+        <Button
+          endIcon={<Send />}
           aria-label="Send"
+          variant="contained"
           disabled={sending()}
           onClick={() => sendMessage(ReChat.newMessage())}
         >
-          <Send />
-        </IconButton>
+         Send 
+        </Button>
       </Toolbar>
     </Paper>
   );

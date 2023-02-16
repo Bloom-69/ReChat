@@ -1,7 +1,16 @@
-@import url('./fonts/Roboto.css');
+@import url('./fonts/roboto/roboto.css');
+@import url('./fonts/roboto-mono/roboto-mono.css');
 
 * {
   padding: 0;
   margin: 0;
-  font-family: "Roboto Regular", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+code {
+  display: inline-block;
+  background-color: #ececec;
+  padding: 5px;
+  border-radius: 4px;
+  font-family: "Roboto Mono", sans-serif;
 }

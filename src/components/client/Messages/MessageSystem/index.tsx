@@ -1,3 +1,4 @@
+import { Avatar, Card, CardHeader } from "@suid/material";
 import { SystemMessage, SystemMessageType } from "revolt-toolset";
 import type { Component } from "solid-js";
 import { Markdown } from "../../../markdown";
@@ -5,10 +6,8 @@ import { Markdown } from "../../../markdown";
 const SystemMessageBase: Component<{sysmessage: SystemMessage}> = ({sysmessage}) => {
     if (sysmessage.detail.type === SystemMessageType.UserJoined) {
         return (
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10">
-                    <img class="avatar rounded-lg" src="/system.webp" />
-                </div>
+            <Card variant="outlined" sx={{margin: 1}}>
+                <CardHeader title={<Avatar src="/system.webp"/>}/>
                 <div class="flex flex-col gap-2">
                     <div>
                         <span class="font-semibold">System</span>
@@ -17,7 +16,7 @@ const SystemMessageBase: Component<{sysmessage: SystemMessage}> = ({sysmessage})
                         <Markdown content={`:01GJTC4RD6XAJXRAAM30KW25VD: | Hello, ${sysmessage.detail.user.username}!`} />
                     </div>
                 </div>
-            </div>
+            </Card>
         )
     } else if (sysmessage.detail.type === SystemMessageType.UserLeft) {
         return (

@@ -37,7 +37,7 @@ function App() {
   let bottomRef: Ref<any>;
   return (
     <>
-      <Show when={window.location.hostname.includes('rechat-plum.vercel.app')}>
+      <Show when={window.location.hostname.includes('vercel.app')}>
         <ThemeProvider theme={theme}>
           <main>
             <Login

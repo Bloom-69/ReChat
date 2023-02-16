@@ -36,7 +36,7 @@ const Shell: Component = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Show when={window.location.hostname.includes(" ")}>
+          <Show when={window.location.hostname.includes("vercel.app")}>
             <Typography
               sx={{ marginLeft: 1, flexGrow: 1 }}
               variant="h6"

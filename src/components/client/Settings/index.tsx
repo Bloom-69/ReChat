@@ -261,7 +261,7 @@ const Settings: Component = () => {
                     />
                   </ListItem>
                 </Show>
-                <Show when={window.location.hostname.includes(" ")}>
+                <Show when={window.location.hostname.includes("vercel.app")}>
                   <ListItem>
                     <ListItemIcon>
                       <Circle
@@ -390,7 +390,7 @@ const Settings: Component = () => {
         <Match when={Tab() === 4}>
           <Container sx={{ marginTop: 1 }}>
             <Card>
-              <Show when={window.location.hostname.includes(" ")}>
+              <Show when={window.location.hostname.includes("vercel.app")}>
                 <CardHeader title="ReChat (Stable)" subheader="Version 0.0.2" />
               </Show>
               <Show when={window.location.hostname.includes("localhost")}>

@@ -9,7 +9,8 @@ import Home from "./components/client/Home";
 import { MessageBox } from "./components/client/Messages/MessageBox";
 import { MessageContainer } from "./components/client/Messages/MessageContainer";
 import { Picker } from "./components/experiments/EmojiPicker";
-import { createTheme, ThemeProvider } from "@suid/material";
+import { Container, createTheme, ThemeProvider } from "@suid/material";
+import MemberSidebar from "./components/client/Shell/Members";
 
 const theme = createTheme({
   palette: {
@@ -37,7 +38,7 @@ function App() {
   let bottomRef: Ref<any>;
   return (
     <>
-      <Show when={window.location.hostname.includes('vercel.app')}>
+      <Show when={window.location.hostname.includes("vercel.app")}>
         <ThemeProvider theme={theme}>
           <main>
             <Login
@@ -57,14 +58,14 @@ function App() {
                   <div>
                     {ReChat.servers.current_channel && (
                       <>
-                        <div ref={bottomRef} />
-                        <MessageContainer />
-                        <Picker
-                          setMessage={ReChat.setMessages}
-                          message={ReChat.messages}
-                          type="emoji"
-                        />
-                        <MessageBox />
+                          <MemberSidebar/>
+                          <MessageContainer />
+                          <Picker
+                            setMessage={ReChat.setMessages}
+                            message={ReChat.messages}
+                            type="emoji"
+                          />
+                          <MessageBox />
                       </>
                     )}
                   </div>
@@ -74,7 +75,7 @@ function App() {
           </main>
         </ThemeProvider>
       </Show>
-      <Show when={window.location.hostname.includes('localhost')}>
+      <Show when={window.location.hostname.includes("localhost")}>
         <ThemeProvider theme={themeCanary}>
           <main>
             <Login
@@ -94,7 +95,7 @@ function App() {
                   <div>
                     {ReChat.servers.current_channel && (
                       <>
-                        <div ref={bottomRef} />
+                        <MemberSidebar/>
                         <MessageContainer />
                         <Picker
                           setMessage={ReChat.setMessages}

@@ -110,14 +110,20 @@ const Login: Component<Login> = ({
                   setPassword(e.currentTarget.value)}
               />
               <ButtonGroup fullWidth>
-                <Button variant="contained" disabled={loading()} type="submit">Login</Button>
-                <Button variant="contained" disabled={true}>Login with Token (Coming Soon)</Button>
+                <Button variant="contained" disabled={loading()} type="submit">
+                  Login
+                </Button>
+                <Button variant="contained" disabled={true}>
+                  Login with Token (Coming Soon)
+                </Button>
               </ButtonGroup>
             </FormControl>
           </form>
 
-          <Breadcrumbs sx={{fontSize: 10, my:2}}>
-            {window.navigator.userAgent}
+          <Breadcrumbs sx={{ fontSize: 10, my: 2 }}>
+            <code>
+              {window.navigator.userAgent}
+            </code>
           </Breadcrumbs>
         </Container>
       )}

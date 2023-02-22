@@ -87,6 +87,8 @@ export const [showSettings, setShowSettings] = createSignal<boolean>(false);
 
 export const [showMenu, setShowMenu] = createSignal<boolean>(false);
 
+export const [showMembers, setShowMembers] = createSignal<boolean>(false);
+
 // Menu Anchor
 
 export const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);

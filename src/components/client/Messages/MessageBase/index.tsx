@@ -15,6 +15,7 @@ import {
 } from "@suid/material";
 
 import * as ReChat from "../../../../lib/ReChat";
+import { Reply } from "@suid/icons-material";
 
 dayjs.extend(relativeTime);
 
@@ -27,7 +28,7 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
 
   return (
     <Grow in={true}>
-      <Card variant="outlined" sx={{ margin: 1 }}>
+      <Card variant="outlined" sx={{ margin: 0, borderRadius: 0 }}>
         <CardHeader
           title={
             <>
@@ -70,6 +71,7 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                       in={true}
                     >
                       <Stack sx={{ margin: 2 }} direction="row">
+                        <Reply/>
                         <Avatar
                           sx={{ width: 24, height: 24, marginRight: 1 }}
                           src={reply.author.generateAvatarURL() || ""}
@@ -105,7 +107,7 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
             </Show>
           }
         />
-          <CardContent>
+          <CardContent sx={{width: 'auto'}}>
             <Markdown content={message.content || ""} />
             {ReChat.settings.showMedia && (
               <Show when={message.attachments}>

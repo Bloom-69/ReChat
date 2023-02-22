@@ -4,10 +4,13 @@ import {
   AppBar,
   Avatar,
   IconButton,
+  ToggleButton,
+  ToggleButtonGroup,
   Toolbar,
   Typography,
 } from "@suid/material";
 import {
+  Group,
   Menu as MenuIcon,
   Settings as SettingsIcon,
 } from "@suid/icons-material";
@@ -55,7 +58,15 @@ const Shell: Component = (props: any) => {
             >
               {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
             </Typography>
+            <IconButton
+              onClick={() => {
+                ReChat.setShowMembers(true);
+              }}
+            >
+              <Group />
+            </IconButton>
           </Show>
+
           <IconButton
             color="inherit"
             onClick={() => ReChat.setShowSettings(true)}

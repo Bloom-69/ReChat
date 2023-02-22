@@ -90,6 +90,64 @@ export default function Home() {
           </List>
         </Drawer>
       </Show>
+      <Show when={window.location.hostname.includes("canary")}>
+        <Drawer
+          open={true}
+          variant="permanent"
+          sx={{
+            position: "sticky",
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          <Toolbar />
+          <Alert severity="warning">Work in progress...</Alert>
+          <List>
+            <ListItem>
+              <ListItemText primary="Direct Messages" />
+            </ListItem>
+            <For each={userlist()}>
+              {(member) => (
+                <ListItem>
+                  <ListItemButton sx={{ width: "auto" }}>
+                    <ListItemAvatar>
+                      <Switch>
+                        <Match when={member.avatar}>
+                          <StyledBadge
+                            overlap="circular"
+                            anchorOrigin={{
+                              vertical: "bottom",
+                              horizontal: "right",
+                            }}
+                            variant="dot"
+                          >
+                            <Avatar
+                              src={member.generateAvatarURL()}
+                              alt={member.username}
+                              sx={{
+                                width: 24,
+                                height: 24,
+                                background: "#e0e0e0",
+                              }}
+                            />
+                          </StyledBadge>
+                        </Match>
+                      </Switch>
+                    </ListItemAvatar>
+                    <ListItemText
+                      sx={{ width: "auto", textOverflow: "ellipsis" }}
+                      primary={member.username}
+                      secondary={member.status}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
+            </For>
+          </List>
+        </Drawer>
+      </Show>
     </>
   );
 }

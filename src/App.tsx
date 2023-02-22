@@ -112,6 +112,43 @@ function App() {
           </main>
         </ThemeProvider>
       </Show>
+      <Show when={window.location.hostname.includes("canary")}>
+        <ThemeProvider theme={themeCanary}>
+          <main>
+            <Login
+              client={client}
+              userSetter={ReChat.setUser}
+              logged={ReChat.loggedIn}
+              logSetter={ReChat.setLoggedIn}
+            />
+            {ReChat.loggedIn() && (
+              <>
+                <Shell>
+                  {ReChat.servers.isHome && (
+                    <>
+                      <Home />
+                    </>
+                  )}
+                  <div>
+                    {ReChat.servers.current_channel && (
+                      <>
+                        <MemberSidebar/>
+                        <MessageContainer />
+                        <Picker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
+                          type="emoji"
+                        />
+                        <MessageBox />
+                      </>
+                    )}
+                  </div>
+                </Shell>
+              </>
+            )}
+          </main>
+        </ThemeProvider>
+      </Show>
     </>
   );
 }

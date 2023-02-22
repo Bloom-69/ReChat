@@ -66,6 +66,23 @@ const Shell: Component = (props: any) => {
               <Group />
             </IconButton>
           </Show>
+          <Show when={window.location.hostname.includes("canary")}>
+            <Typography
+              sx={{ marginLeft: 1, flexGrow: 1 }}
+              variant="h6"
+              color="inherit"
+              component="div"
+            >
+              {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
+            </Typography>
+            <IconButton
+              onClick={() => {
+                ReChat.setShowMembers(true);
+              }}
+            >
+              <Group />
+            </IconButton>
+          </Show>
 
           <IconButton
             color="inherit"

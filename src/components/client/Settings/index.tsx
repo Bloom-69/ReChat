@@ -260,7 +260,28 @@ const Settings: Component = () => {
                     />
                   </ListItem>
                 </Show>
-                <Show when={window.location.hostname.includes("vercel.app")}>
+                <Show when={window.location.hostname.includes("canary")}>
+                  <ListItem>
+                    <ListItemIcon>
+                      <Circle
+                        sx={{ color: ReChat.settings.appearance.primary_color }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Primary Color" secondary="Unavailable in Canary Version" />
+                    <TextField
+                      disabled
+                      variant="standard"
+                      value={ReChat.settings.appearance.primary_color}
+                      onChange={(e) =>
+                        ReChat.setSettings(
+                          "appearance",
+                          "primary_color",
+                          e.target.value,
+                        )}
+                    />
+                  </ListItem>
+                </Show>
+                <Show when={window.location.hostname.includes("client")}>
                   <ListItem>
                     <ListItemIcon>
                       <Circle
@@ -280,24 +301,6 @@ const Settings: Component = () => {
                     />
                   </ListItem>
                 </Show>
-                <ListItem>
-                  <ListItemIcon>
-                    <Circle
-                      sx={{ color: ReChat.settings.appearance.secondary_color }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary="Secondary Color" />
-                  <TextField
-                    variant="standard"
-                    value={ReChat.settings.appearance.secondary_color}
-                    onChange={(e) =>
-                      ReChat.setSettings(
-                        "appearance",
-                        "secondary_color",
-                        e.target.value,
-                      )}
-                  />
-                </ListItem>
                 <ListItem>
                   <ListItemIcon>
                     <Apps />
@@ -371,7 +374,7 @@ const Settings: Component = () => {
                 <Window />
               </ListItemIcon>
               <ListItemText
-                primary="Apperance"
+                primary="Appearance"
                 secondary="Customize your client (WIP)"
               />
               <SwitchMUI
@@ -389,10 +392,13 @@ const Settings: Component = () => {
         <Match when={Tab() === 4}>
           <Container sx={{ marginTop: 1 }}>
             <Card>
-              <Show when={window.location.hostname.includes("vercel.app")}>
+              <Show when={window.location.hostname.includes("client")}>
                 <CardHeader title="ReChat (Stable)" subheader="Version 0.0.2" />
               </Show>
               <Show when={window.location.hostname.includes("localhost")}>
+                <CardHeader title="ReChat (Dev)" subheader="Version 0.0.3" />
+              </Show>
+              <Show when={window.location.hostname.includes("canary")}>
                 <CardHeader title="ReChat (Canary)" subheader="Version 0.0.3" />
               </Show>
               <CardContent>
@@ -404,7 +410,7 @@ const Settings: Component = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card sx={{marginTop: 1}}>
               <CardHeader title="Browser Information" />
               <CardContent>
                 <code>User Agent: {window.navigator.userAgent}</code>

@@ -49,7 +49,7 @@ export default function MemberSidebar() {
                       <Avatar
                         src={member.generateAvatarURL()}
                         alt={member.username}
-                        sx={{ width: 24, height: 24, background: "#e0e0e0" }}
+                        sx={{ background: "#e0e0e0" }}
                       />
                     </Match>
                   </Switch>
@@ -57,7 +57,7 @@ export default function MemberSidebar() {
                 <ListItemText
                   primary={
                     <>
-                      {member.username} {<Chip label={member.relationship || "User"} />}
+                      {member.username} {<Chip size="small" label={member.relationship || "User"} />}
                     </>
                   }
                   secondary={member.status}

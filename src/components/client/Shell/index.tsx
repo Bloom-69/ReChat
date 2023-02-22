@@ -59,6 +59,7 @@ const Shell: Component = (props: any) => {
               {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
             </Typography>
             <IconButton
+              color="inherit"
               onClick={() => {
                 ReChat.setShowMembers(true);
               }}
@@ -76,6 +77,7 @@ const Shell: Component = (props: any) => {
               {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
             </Typography>
             <IconButton
+              color="inherit"
               onClick={() => {
                 ReChat.setShowMembers(true);
               }}

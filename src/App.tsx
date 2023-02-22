@@ -38,7 +38,7 @@ function App() {
   let bottomRef: Ref<any>;
   return (
     <>
-      <Show when={window.location.hostname.includes("vercel.app")}>
+      <Show when={window.location.hostname.includes("client")}>
         <ThemeProvider theme={theme}>
           <main>
             <Login

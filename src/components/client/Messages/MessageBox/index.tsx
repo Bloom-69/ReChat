@@ -44,7 +44,7 @@ const MessageBox: Component = () => {
   return (
     <Paper
       variant="outlined"
-      sx={{ position: "sticky", bottom: 0, zIndex: 100, borderRadius: 0 }}
+      sx={{ position: "sticky", bottom: 0, zIndex: 1, borderRadius: 0 }}
     >
       <Toolbar>
         <FormControl fullWidth sx={{ marginRight: 1 }}>
@@ -72,7 +72,8 @@ const MessageBox: Component = () => {
 
         {ReChat.settings.experiments.gifbox && (
           <IconButton
-            aria-label="Emoji"
+            disabled
+            aria-label="Gifbox"
             onClick={(event) => {
               ReChat.setShowGifBoxPick(true);
               ReChat.setAnchorGif(event.currentTarget);

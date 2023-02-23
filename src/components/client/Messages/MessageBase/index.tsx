@@ -33,14 +33,14 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
           title={
             <>
               <Grow in={true}>
-                <Stack direction="row">
+                <Stack gap={2} direction="row">
                   <Avatar
                     src={message.generateMasqAvatarURL() ||
                       message.member.generateAvatarURL() ||
                       message.author.generateAvatarURL()}
-                  />{" "}
+                  />
                   <span
-                    style={{ "margin-top": "3.2px", "margin-left": "5px" }}
+                    style={{ "font-weight": "bold", "margin-top": "3.2px" }}
                     class={message.member.colorRole &&
                         message.member.colorRole.color.includes("gradient")
                       ? css`
@@ -56,7 +56,7 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                     {message.masquerade?.name ||
                       message.member?.nickname ||
                       message.author?.username ||
-                      "Random Revolt User"}
+                      "Revolt User"}
                   </span>
                 </Stack>
               </Grow>
@@ -70,8 +70,8 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                     <Grow
                       in={true}
                     >
-                      <Stack sx={{ margin: 2 }} direction="row">
-                        <Reply />
+                      <Stack sx={{ my: 1 }} direction="row">
+                        <Reply  sx={{mx: .5}}/>
                         <Avatar
                           sx={{ width: 24, height: 24, marginRight: 1 }}
                           src={reply.author.generateAvatarURL() || ""}
@@ -93,12 +93,12 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                           {reply.masquerade?.name ||
                             reply.member?.nickname ||
                             reply.author?.username ||
-                            "Random Revolt User"}:
+                            "Revolt User"}:
                         </span>
                         <Markdown
                           content={reply.content.length > 24 &&
-                              reply.content.substring(0, 24) ||
-                            "**No Content**"}
+                              reply.content.substring(0, 50) ||
+                            "**Unable to load message**"}
                         />
                       </Stack>
                     </Grow>

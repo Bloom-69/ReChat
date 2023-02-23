@@ -59,8 +59,6 @@ export const [settings, setSettings] = createLocalStore<config>("settings", {
 
   appearance: {
     primary_color: "#2196f3",
-    secondary_color: "#d500f9",
-    app_background: '#FFFFFF',
     appbar_vairant: "outlined",
   }
 });

@@ -1,7 +1,6 @@
 import type { Accessor, Component, Setter } from "solid-js";
-import { createSignal } from "solid-js";
 import { Message } from "revolt.js";
-import EmojiTab from "./Tabs/emoji";
+import GifTab from "./gifs/index";
 import { Menu } from "@suid/material";
 
 import * as ReChat from "../../../lib/ReChat";
@@ -12,19 +11,17 @@ interface props {
   messageToReact?: Message;
 }
 
-const [tab, setTab] = createSignal<number>(0);
-
-export const Picker: Component<props> = (props) => {
+export const GifBoxPicker: Component<props> = (props) => {
   return (
     <Menu
       sx={{ height: 300 }}
-      anchorEl={ReChat.anchorPicker()}
-      open={ReChat.showPicker()}
-      onClose={() => ReChat.setShowPicker(false)}
+      anchorEl={ReChat.anchorGif()}
+      open={ReChat.showGifBoxPick()}
+      onClose={() => ReChat.setShowGifBoxPick(false)}
     >
-      <EmojiTab
-        setMessage={props.setMessage}
+      <GifTab
         message={props.message}
+        setMessage={props.setMessage}
       />
     </Menu>
   );

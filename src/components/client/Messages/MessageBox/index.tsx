@@ -2,7 +2,6 @@ import { createSignal } from "solid-js";
 import * as ReChat from "../../../../lib/ReChat";
 import { ulid } from "ulid";
 
-
 import type { Component } from "solid-js";
 import {
   Button,
@@ -12,7 +11,7 @@ import {
   TextField,
   Toolbar,
 } from "@suid/material";
-import { Face, Send } from "@suid/icons-material";
+import { Face, Gif, Send } from "@suid/icons-material";
 
 const [sending, setSending] = createSignal<boolean>(false);
 
@@ -40,8 +39,6 @@ async function sendMessage(message: string) {
     setSending(false);
   }
 }
-
-
 
 const MessageBox: Component = () => {
   return (
@@ -72,6 +69,18 @@ const MessageBox: Component = () => {
             <Face />
           </IconButton>
         )}
+
+        {ReChat.settings.experiments.gifbox && (
+          <IconButton
+            aria-label="Emoji"
+            onClick={(event) => {
+              ReChat.setShowGifBoxPick(true);
+              ReChat.setAnchorGif(event.currentTarget);
+            }}
+          >
+            <Gif/>
+          </IconButton>
+        )}
         <Button
           endIcon={<Send />}
           aria-label="Send"
@@ -79,7 +88,7 @@ const MessageBox: Component = () => {
           disabled={sending()}
           onClick={() => sendMessage(ReChat.newMessage())}
         >
-         Send 
+          Send
         </Button>
       </Toolbar>
     </Paper>

@@ -2,6 +2,7 @@ import {
   Alert,
   Avatar,
   Badge,
+  Chip,
   Drawer,
   List,
   ListItem,
@@ -80,7 +81,12 @@ export default function Home() {
                     </ListItemAvatar>
                     <ListItemText
                       sx={{ width: "auto", textOverflow: "ellipsis" }}
-                      primary={member.username}
+                      primary={
+                        <>
+                          {member.username} <Chip sx={{mx: 1}} label={member.presence || "None"} />
+                          <Chip sx={{mx: 1}} label={member.relationship || "User"} />
+                        </>
+                      }
                       secondary={member.status}
                     />
                   </ListItemButton>
@@ -138,7 +144,11 @@ export default function Home() {
                     </ListItemAvatar>
                     <ListItemText
                       sx={{ width: "auto", textOverflow: "ellipsis" }}
-                      primary={member.username}
+                      primary={
+                        <>
+                          {member.username} <Chip label={member.presence} />
+                        </>
+                      }
                       secondary={member.status}
                     />
                   </ListItemButton>

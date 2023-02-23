@@ -77,6 +77,10 @@ export const [showGifBox, setShowGifBox] = createSignal<boolean>(false);
 
 export const [anchorPicker, setAnchorPicker] = createSignal<null | HTMLElement>(null);
 
+export const [showGifBoxPick, setShowGifBoxPick] = createSignal<boolean>(false);
+
+export const [anchorGif, setAnchorGif] = createSignal<null | HTMLElement>(null);
+
 // ReChat Components
 
 export const [showServerSidebar, setShowServerSidebar] = createSignal<boolean>(false)

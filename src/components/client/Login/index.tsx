@@ -15,6 +15,7 @@ import { SetStoreFunction } from "solid-js/store";
 import type { Client } from "revolt-toolset";
 
 import type { user } from "../../../types/rechat-types";
+import { LoginOutlined } from "@suid/icons-material";
 
 interface Login {
   client: Client;
@@ -110,7 +111,12 @@ const Login: Component<Login> = ({
                   setPassword(e.currentTarget.value)}
               />
               <ButtonGroup fullWidth>
-                <Button variant="contained" disabled={loading()} type="submit">
+                <Button
+                  startIcon={<LoginOutlined />}
+                  variant="contained"
+                  disabled={loading()}
+                  type="submit"
+                >
                   Login
                 </Button>
                 <Button variant="contained" disabled={true}>

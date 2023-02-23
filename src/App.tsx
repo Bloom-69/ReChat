@@ -11,6 +11,7 @@ import { MessageContainer } from "./components/client/Messages/MessageContainer"
 import { Picker } from "./components/experiments/EmojiPicker";
 import { Container, createTheme, ThemeProvider } from "@suid/material";
 import MemberSidebar from "./components/client/Shell/Members";
+import { GifBoxPicker } from "./components/experiments/GifBoxPicker";
 
 const theme = createTheme({
   palette: {
@@ -58,14 +59,13 @@ function App() {
                   <div>
                     {ReChat.servers.current_channel && (
                       <>
-                          <MemberSidebar/>
-                          <MessageContainer />
-                          <Picker
-                            setMessage={ReChat.setMessages}
-                            message={ReChat.messages}
-                            type="emoji"
-                          />
-                          <MessageBox />
+                        <MemberSidebar />
+                        <MessageContainer />
+                        <Picker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
+                        />
+                        <MessageBox />
                       </>
                     )}
                   </div>
@@ -95,12 +95,15 @@ function App() {
                   <div>
                     {ReChat.servers.current_channel && (
                       <>
-                        <MemberSidebar/>
+                        <MemberSidebar />
                         <MessageContainer />
                         <Picker
                           setMessage={ReChat.setMessages}
                           message={ReChat.messages}
-                          type="emoji"
+                        />
+                        <GifBoxPicker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
                         />
                         <MessageBox />
                       </>
@@ -132,12 +135,15 @@ function App() {
                   <div>
                     {ReChat.servers.current_channel && (
                       <>
-                        <MemberSidebar/>
+                        <MemberSidebar />
                         <MessageContainer />
                         <Picker
                           setMessage={ReChat.setMessages}
                           message={ReChat.messages}
-                          type="emoji"
+                        />
+                        <GifBoxPicker
+                          setMessage={ReChat.setMessages}
+                          message={ReChat.messages}
                         />
                         <MessageBox />
                       </>

@@ -57,7 +57,20 @@ export default function MemberSidebar() {
                 <ListItemText
                   primary={
                     <>
-                      {member.username} {<Chip size="small" label={member.relationship || "User"} />}
+                      {member.username} {
+                        <>
+                          <Chip
+                            size="small"
+                            label={member.relationship || "User"}
+                          />
+
+                          <Chip
+                            sx={{ mx: 1 }}
+                            size="small"
+                            label={member.presence || "None"}
+                          />
+                        </>
+                      }
                     </>
                   }
                   secondary={member.status}

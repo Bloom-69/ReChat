@@ -1,12 +1,21 @@
-import { Button, FormControl, TextField } from "@suid/material";
+import {
+  Button,
+  Card,
+  CardMedia,
+  CircularProgress,
+  FormControl,
+  Grid,
+  ListItem,
+  Paper,
+  TextField,
+} from "@suid/material";
 import type { Accessor, Component, Setter } from "solid-js";
 import { createEffect, createSignal, For } from "solid-js";
 import { gbClient } from "../../../../lib/gifbox";
 
 const [loading, setLoading] = createSignal<boolean>(true);
 const [error, setError] = createSignal<string>("");
-const [email, setEmail] = createSignal<string>("");
-const [password, setPassword] = createSignal<string>("");
+const [token, setToken] = createSignal<string>("");
 const [loggedIn, setLoggedIn] = createSignal<boolean>(false);
 const [gifs, setGifs] = createSignal<any[]>();
 const [query, setQuery] = createSignal<string>("");
@@ -14,7 +23,6 @@ const [query, setQuery] = createSignal<string>("");
 interface props {
   message: Accessor<string>;
   setMessage: Setter<string>;
-  tab: Accessor<number>;
 }
 
 async function requestPopularGifs() {
@@ -33,14 +41,14 @@ async function requestPopularGifs() {
 
 async function loginToGifbox() {
   try {
-    if (email() && password()) {
+    if (token()) {
       gbClient
-        .createSession(email() as any, password() as any, "ReChat")
+        .loginBearer(token())
         .catch((e) => {
           throw e;
         });
     } else {
-      throw "You need to provide an Email/Password :/";
+      throw "You need to provide an Token :/";
     }
   } catch (e) {
     setError(e as string);
@@ -70,12 +78,12 @@ export const GifTab: Component<props> = (props) => {
   }
 
   createEffect(async () => {
-    if (props.tab() === 1 && loggedIn()) {
+    if (loggedIn()) {
       await requestPopularGifs().then((e) => {
         setGifs(e as any);
       });
     }
-  }, [props.tab()]);
+  }, [props]);
 
   return (
     <>
@@ -93,27 +101,32 @@ export const GifTab: Component<props> = (props) => {
             </FormControl>
             {loading()
               ? (
-                <div class="loading">
-                  <span>Loading Gifs... 📦</span>
-                </div>
+                <Paper
+                  sx={{ width: "auto", height: "auto", borderRadius: "999" }}
+                >
+                  <CircularProgress />
+                </Paper>
               )
               : (
                 <For each={gifs()}>
                   {(gif) => {
                     console.log(gif);
                     return (
-                      <div
-                        class="gif-container"
-                        onClick={() =>
-                          addToText(
-                            `[](https://api.gifbox.me/file/posts/${gif.file.fileName})`,
-                          )}
-                      >
-                        <img
-                          class="gif"
-                          src={`https://api.gifbox.me/file/posts/${gif.file.fileName}`}
-                        />
-                      </div>
+                      <Grid container>
+                        <Grid item>
+                          <Card
+                            onClick={() =>
+                              addToText(
+                                `[](https://api.gifbox.me/file/posts/${gif.file.fileName})`,
+                              )}
+                          >
+                            <CardMedia
+                              component="img"
+                              src={`https://api.gifbox.me/file/posts/${gif.file.fileName}`}
+                            />
+                          </Card>
+                        </Grid>
+                      </Grid>
                     );
                   }}
                 </For>
@@ -122,24 +135,14 @@ export const GifTab: Component<props> = (props) => {
           </div>
         )
         : (
-          <div class="solenoid-gifbox-login">
-            <span class="needs-login-gifbox">
-              You need to log into GIFBox before using this feature...
-            </span>
-            <input
-              value={email() ?? ""}
-              onChange={(e) => setEmail(e.currentTarget.value)}
-              placeholder="Gifbox Email"
-              type="email"
+          <ListItem>
+            <TextField
+              value={token() ?? ""}
+              onChange={(e) => setToken(e.currentTarget.value)}
+              label="Gifbox Token"
             />
-            <input
-              value={password() ?? ""}
-              onChange={(e) => setPassword(e.currentTarget.value)}
-              placeholder="Password"
-              type="password"
-            />
-            <button onClick={loginToGifbox}>Login</button>
-          </div>
+            <Button onClick={loginToGifbox}>Login</Button>
+          </ListItem>
         )}
     </>
   );

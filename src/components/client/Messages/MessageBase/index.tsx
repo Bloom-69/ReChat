@@ -21,7 +21,7 @@ dayjs.extend(relativeTime);
 
 const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
   const [replies, setReplies] = createSignal<BaseMessage[] | undefined>();
-  
+
   message.fetchReplies().then((replies) => {
     setReplies(replies);
   });
@@ -71,7 +71,7 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                       in={true}
                     >
                       <Stack sx={{ margin: 2 }} direction="row">
-                        <Reply/>
+                        <Reply />
                         <Avatar
                           sx={{ width: 24, height: 24, marginRight: 1 }}
                           src={reply.author.generateAvatarURL() || ""}
@@ -107,53 +107,53 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
             </Show>
           }
         />
-          <CardContent sx={{width: 'auto'}}>
-            <Markdown content={message.content || ""} />
-            {ReChat.settings.showMedia && (
-              <Show when={message.attachments}>
-                <Stack direction="column" gap={2}>
-                    <For each={message.attachments}>
-                      {(attachment) => (
-                        <Switch>
-                          <Match when={attachment.metadata.type == "Image"}>
-                            <img
-                              src={attachment.generateURL()}
-                              style={{
-                                "max-width": "500px",
-                                "max-height": "500px",
-                                "border-radius": "4px",
-                              }}
-                            />
-                          </Match>
-                          <Match when={attachment.metadata.type === "Video"}>
-                            <video
-                              src={attachment.generateURL()}
-                              style={{
-                                "max-width": "500px",
-                                "max-height": "500px",
-                                "border-radius": "4px",
-                              }}
-                              controls
-                            />
-                          </Match>
-                          <Match when={attachment.metadata.type === "Audio"}>
-                            <audio
-                              src={attachment.generateURL()}
-                              style={{
-                                "max-width": "500px",
-                                "max-height": "500px",
-                                "border-radius": "4px",
-                              }}
-                              controls
-                            />
-                          </Match>
-                        </Switch>
-                      )}
-                    </For>
-                </Stack>
-              </Show>
-            )}
-          </CardContent>
+        <CardContent sx={{ width: "auto" }}>
+          <Markdown content={message.content || ""} />
+          {ReChat.settings.showMedia && (
+            <Show when={message.attachments}>
+              <Stack direction="column" gap={2}>
+                <For each={message.attachments}>
+                  {(attachment) => (
+                    <Switch>
+                      <Match when={attachment.metadata.type == "Image"}>
+                        <img
+                          src={attachment.generateURL()}
+                          style={{
+                            "max-width": "500px",
+                            "max-height": "500px",
+                            "border-radius": "4px",
+                          }}
+                        />
+                      </Match>
+                      <Match when={attachment.metadata.type === "Video"}>
+                        <video
+                          src={attachment.generateURL()}
+                          style={{
+                            "max-width": "500px",
+                            "max-height": "500px",
+                            "border-radius": "4px",
+                          }}
+                          controls
+                        />
+                      </Match>
+                      <Match when={attachment.metadata.type === "Audio"}>
+                        <audio
+                          src={attachment.generateURL()}
+                          style={{
+                            "max-width": "500px",
+                            "max-height": "500px",
+                            "border-radius": "4px",
+                          }}
+                          controls
+                        />
+                      </Match>
+                    </Switch>
+                  )}
+                </For>
+              </Stack>
+            </Show>
+          )}
+        </CardContent>
       </Card>
     </Grow>
   );

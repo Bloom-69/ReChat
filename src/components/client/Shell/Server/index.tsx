@@ -40,7 +40,7 @@ export default function ServerSidebar() {
               }}
             >
               <ListItemIcon>
-                <HomeIcon/>
+                <HomeIcon />
               </ListItemIcon>
               Home
             </ListItemButton>
@@ -61,7 +61,7 @@ export default function ServerSidebar() {
                         <Avatar
                           src={server.generateIconURL()}
                           alt={server.name}
-                          sx={{ width: 24, height: 24, background: '#e0e0e0' }}
+                          sx={{ width: 24, height: 24, background: "#e0e0e0" }}
                         />
                       </Match>
                     </Switch>

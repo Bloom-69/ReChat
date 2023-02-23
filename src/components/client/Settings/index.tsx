@@ -8,7 +8,6 @@ import {
   Dialog,
   FormControl,
   IconButton,
-  InputLabel,
   List,
   ListItem,
   ListItemButton,
@@ -31,7 +30,7 @@ import {
   Close as CloseIcon,
   Face,
   FormatPaint,
-  GifBox,
+  Gif,
   Image,
   Info,
   Person,
@@ -85,7 +84,6 @@ function updateStatus(
 const [Tab, setTab] = createSignal<Index>(0);
 
 const Settings: Component = () => {
-
   return (
     <Dialog
       fullScreen
@@ -246,7 +244,10 @@ const Settings: Component = () => {
                         sx={{ color: ReChat.settings.appearance.primary_color }}
                       />
                     </ListItemIcon>
-                    <ListItemText primary="Primary Color" secondary="Unavailable in Canary Version" />
+                    <ListItemText
+                      primary="Primary Color"
+                      secondary="Unavailable in Canary Version"
+                    />
                     <TextField
                       disabled
                       variant="standard"
@@ -267,7 +268,10 @@ const Settings: Component = () => {
                         sx={{ color: ReChat.settings.appearance.primary_color }}
                       />
                     </ListItemIcon>
-                    <ListItemText primary="Primary Color" secondary="Unavailable in Canary Version" />
+                    <ListItemText
+                      primary="Primary Color"
+                      secondary="Unavailable in Canary Version"
+                    />
                     <TextField
                       disabled
                       variant="standard"
@@ -353,13 +357,14 @@ const Settings: Component = () => {
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <GifBox />
+                <Gif />
               </ListItemIcon>
               <ListItemText
                 primary="GifBox"
-                secondary="Enable GifBox support (Requires Emoji Picker enabled)"
+                secondary="Enable GifBox support and Picker (Disabled due of Internal Server Error)"
               />
               <SwitchMUI
+                disabled
                 value={ReChat.settings.experiments.gifbox}
                 checked={ReChat.settings.experiments.gifbox}
                 onChange={() => {
@@ -410,19 +415,17 @@ const Settings: Component = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card sx={{marginTop: 1}}>
+            <Card sx={{ marginTop: 1 }}>
               <CardHeader title="Browser Information" />
               <CardContent>
                 <code>User Agent: {window.navigator.userAgent}</code>
               </CardContent>
             </Card>
-            <Card sx={{marginTop: 1}}>
+            <Card sx={{ marginTop: 1 }}>
               <CardHeader title="System Information" />
               <CardContent>
-                <code>Platform: {window.navigator.platform}</code>
-                {" "}
-                <code>Vendor: {window.navigator.vendor}</code>
-                {" "}
+                <code>Platform: {window.navigator.platform}</code>{" "}
+                <code>Vendor: {window.navigator.vendor}</code>{" "}
                 <code>Product: {window.navigator.product}</code>
               </CardContent>
             </Card>

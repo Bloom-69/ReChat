@@ -28,6 +28,7 @@ import {
   ArrowBack,
   Circle,
   Close as CloseIcon,
+  EmojiEmotions,
   Face,
   FormatPaint,
   Gif,
@@ -246,7 +247,7 @@ const Settings: Component = () => {
                     </ListItemIcon>
                     <ListItemText
                       primary="Primary Color"
-                      secondary="Unavailable in Canary Version"
+                      secondary="Unavailable in Dev Version (I know you are working)"
                     />
                     <TextField
                       disabled
@@ -305,6 +306,39 @@ const Settings: Component = () => {
                     />
                   </ListItem>
                 </Show>
+                <ListItem>
+                  <ListItemIcon>
+                    <EmojiEmotions />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Emoji"
+                    secondary="Changing emoji requires refetch the message to see the effects"
+                  />
+                  <FormControl>
+                    <Select
+                      variant="standard"
+                      id="rechat-appbar_variant-select"
+                      value={ReChat.settings.emoji}
+                      onChange={(e) => {
+                        ReChat.setSettings(
+                          "emoji",
+                          e.target.value,
+                        );
+                      }}
+                    >
+                      <MenuItem value="mutant">
+                        Mutant Remix (By Revolt)
+                      </MenuItem>
+                      <MenuItem value="twemoji">
+                        Twemoji (By Twitter)
+                      </MenuItem>
+                      <MenuItem value="noto">Noto Emoji (By Google)</MenuItem>
+                      <MenuItem value="fluent-3d">
+                        Fluent 3D (By Microsoft)
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </ListItem>
                 <ListItem>
                   <ListItemIcon>
                     <Apps />

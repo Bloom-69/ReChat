@@ -13,7 +13,6 @@ export function RenderMention({ match }: CustomComponentProps) {
           sx={{width: 24, height: 24}}
           src={user.generateAvatarURL()}
           alt={user.username}
-          class="w-5 h-5 rounded-full"
         />
       }
       label={<>@{user.username}</>}

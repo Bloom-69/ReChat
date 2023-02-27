@@ -34,7 +34,7 @@ export const [newMode, setNewMode] = createSignal<
 >();
 export const [newStatus, setNewStatus] = createSignal<string | null>();
 
-// Solenoid Default Settings
+// ReChat Default Settings
 export const [settings, setSettings] = createLocalStore<config>("settings", {
   show: false,
   showSuffix: false,

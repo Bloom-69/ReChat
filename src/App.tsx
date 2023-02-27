@@ -18,9 +18,6 @@ const theme = createTheme({
     primary: {
       main: `${ReChat.settings.appearance.primary_color}`,
     },
-    secondary: {
-      main: `${ReChat.settings.appearance.secondary_color}`,
-    },
   },
 });
 
@@ -29,8 +26,13 @@ const themeCanary = createTheme({
     primary: {
       main: "#fbc02d",
     },
-    secondary: {
-      main: `${ReChat.settings.appearance.secondary_color}`,
+  },
+});
+
+const themeDev = createTheme({
+  palette: {
+    primary: {
+      main: "#81c784",
     },
   },
 });
@@ -76,7 +78,7 @@ function App() {
         </ThemeProvider>
       </Show>
       <Show when={window.location.hostname.includes("localhost")}>
-        <ThemeProvider theme={themeCanary}>
+        <ThemeProvider theme={themeDev}>
           <main>
             <Login
               client={client}

@@ -49,7 +49,7 @@ declare interface settings {
     zoomLevel: number;
     showMedia: boolean;
     debug: boolean;
-    emoji: "mutant" | "twemoji" | "fluent-3d" | string;
+    emoji: "mutant" | "twemoji" | "fluent-3d" | "noto" | string;
     experiments: {
         picker: boolean,
         gifbox: boolean,

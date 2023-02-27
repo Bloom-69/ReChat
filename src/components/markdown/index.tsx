@@ -78,6 +78,9 @@ const components = {
   `,
   table: styled.table`
     border-collapse: collapse;
+    td {
+      border-radius: 4px;
+    }
     th,
     td {
       padding: 6px;
@@ -97,8 +100,7 @@ const components = {
   blockquote: styled.blockquote`
     margin: 2px 0;
     padding: 2px 0;
-    border-inline-start: 4px solid
-      #ccc;
+    border-inline-start: 4px solid #ccc;
     > * {
       margin: 0 8px;
     }
@@ -175,7 +177,7 @@ export function Markdown(props: MarkdownProps) {
       schema: html,
       listDepth: 0,
     },
-    // @ts-expect-error this is the correct type
+
     hastNode
   );
 }

@@ -56,7 +56,7 @@ const Shell: Component = (props: any) => {
               color="inherit"
               component="div"
             >
-              {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
+              {ReChat.servers.current_channel?.name || "ReChat (Dev)"}
             </Typography>
             <IconButton
               color="inherit"

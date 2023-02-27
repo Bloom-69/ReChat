@@ -83,7 +83,7 @@ export default function Home() {
                       sx={{ width: "auto", textOverflow: "ellipsis" }}
                       primary={
                         <>
-                          {member.username} <Chip sx={{mx: 1}} label={member.presence || "None"} />
+                          {member.username} <Chip sx={{mx: 1}} label={member.presence || "Offline"} />
                           <Chip sx={{mx: 1}} label={member.relationship || "User"} />
                         </>
                       }
@@ -146,7 +146,7 @@ export default function Home() {
                       sx={{ width: "auto", textOverflow: "ellipsis" }}
                       primary={
                         <>
-                          {member.username} <Chip label={member.presence} />
+                          {member.username} <Chip label={member.presence || "Offline"} />
                         </>
                       }
                       secondary={member.status}

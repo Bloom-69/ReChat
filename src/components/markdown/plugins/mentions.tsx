@@ -15,6 +15,8 @@ export function RenderMention({ match }: CustomComponentProps) {
           alt={user.username}
         />
       }
+
+      size="small"
       label={<>@{user.username}</>}
     />
   );

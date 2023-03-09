@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@suid/icons-material': ^0.5.8
   '@suid/material': ^0.10.1
+  '@suid/types': ^0.4.0
   '@suid/vite-plugin': ^0.1.2
   comma-separated-tokens: ^2.0.3
   dayjs: ^1.11.7
@@ -38,6 +39,7 @@ specifiers:
 dependencies:
   '@suid/icons-material': 0.5.8_solid-js@1.6.10
   '@suid/material': 0.10.1_solid-js@1.6.10
+  '@suid/types': 0.4.0_solid-js@1.6.10
   '@suid/vite-plugin': 0.1.2_vite@4.1.1
   comma-separated-tokens: 2.0.3
   dayjs: 1.11.7

@@ -3,6 +3,7 @@ import {
   Avatar,
   Badge,
   Chip,
+  Container,
   Drawer,
   List,
   ListItem,
@@ -11,6 +12,7 @@ import {
   ListItemText,
   styled,
   Toolbar,
+  Typography,
 } from "@suid/material";
 
 import type { User } from "revolt-toolset";
@@ -18,6 +20,7 @@ import type { User } from "revolt-toolset";
 import { revolt } from "../../../lib/revolt";
 
 import { createSignal, For, Match, Show, Switch } from "solid-js";
+import { Forum, Menu } from "@suid/icons-material";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -33,131 +36,10 @@ export default function Home() {
   SetUserList(revolt.users.items());
   return (
     <>
-      <Show when={window.location.hostname.includes("localhost")}>
-        <Drawer
-          open={true}
-          variant="permanent"
-          sx={{
-            position: "sticky",
-            flexShrink: 0,
-            [`& .MuiDrawer-paper`]: {
-              boxSizing: "border-box",
-            },
-          }}
-        >
-          <Toolbar />
-          <Alert severity="warning">Work in progress...</Alert>
-          <List>
-            <ListItem>
-              <ListItemText primary="Direct Messages" />
-            </ListItem>
-            <For each={userlist()}>
-              {(member) => (
-                <ListItem>
-                  <ListItemButton sx={{ width: "auto" }}>
-                    <ListItemAvatar>
-                      <Switch>
-                        <Match when={member.avatar}>
-                          <StyledBadge
-                            overlap="circular"
-                            anchorOrigin={{
-                              vertical: "bottom",
-                              horizontal: "right",
-                            }}
-                            variant="dot"
-                          >
-                            <Avatar
-                              src={member.generateAvatarURL()}
-                              alt={member.username}
-                              sx={{
-                                width: 24,
-                                height: 24,
-                                background: "#e0e0e0",
-                              }}
-                            />
-                          </StyledBadge>
-                        </Match>
-                      </Switch>
-                    </ListItemAvatar>
-                    <ListItemText
-                      sx={{ width: "auto", textOverflow: "ellipsis" }}
-                      primary={
-                        <>
-                          {member.username} <Chip sx={{mx: 1}} label={member.presence || "Offline"} />
-                          <Chip sx={{mx: 1}} label={member.relationship || "User"} />
-                        </>
-                      }
-                      secondary={member.status}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              )}
-            </For>
-          </List>
-        </Drawer>
-      </Show>
-      <Show when={window.location.hostname.includes("canary")}>
-        <Drawer
-          open={true}
-          variant="permanent"
-          sx={{
-            position: "sticky",
-            flexShrink: 0,
-            [`& .MuiDrawer-paper`]: {
-              boxSizing: "border-box",
-            },
-          }}
-        >
-          <Toolbar />
-          <Alert severity="warning">Work in progress...</Alert>
-          <List>
-            <ListItem>
-              <ListItemText primary="Direct Messages" />
-            </ListItem>
-            <For each={userlist()}>
-              {(member) => (
-                <ListItem>
-                  <ListItemButton sx={{ width: "auto" }}>
-                    <ListItemAvatar>
-                      <Switch>
-                        <Match when={member.avatar}>
-                          <StyledBadge
-                            overlap="circular"
-                            anchorOrigin={{
-                              vertical: "bottom",
-                              horizontal: "right",
-                            }}
-                            variant="dot"
-                          >
-                            <Avatar
-                              src={member.generateAvatarURL()}
-                              alt={member.username}
-                              sx={{
-                                width: 24,
-                                height: 24,
-                                background: "#e0e0e0",
-                              }}
-                            />
-                          </StyledBadge>
-                        </Match>
-                      </Switch>
-                    </ListItemAvatar>
-                    <ListItemText
-                      sx={{ width: "auto", textOverflow: "ellipsis" }}
-                      primary={
-                        <>
-                          {member.username} <Chip label={member.presence || "Offline"} />
-                        </>
-                      }
-                      secondary={member.status}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              )}
-            </For>
-          </List>
-        </Drawer>
-      </Show>
+    <Container sx={{textAlign: 'center'}}>
+      <Forum sx={{fontSize: 350, color: "GrayText"}}/>
+      <Typography variant="h3" color="GrayText">Select <Menu fontSize="large"/> to find any server/channel</Typography>
+    </Container>
     </>
   );
 }

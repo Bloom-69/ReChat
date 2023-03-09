@@ -3,6 +3,7 @@ import { Component, Show } from "solid-js";
 import {
   AppBar,
   Avatar,
+  Container,
   IconButton,
   ToggleButton,
   ToggleButtonGroup,
@@ -30,7 +31,7 @@ const Shell: Component = (props: any) => {
         position="sticky"
         variant={ReChat.settings.appearance.appbar_vairant}
       >
-        <Toolbar variant="dense">
+        <Toolbar>
           <IconButton
             color="inherit"
             onClick={() => {
@@ -39,61 +40,31 @@ const Shell: Component = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Show when={window.location.hostname.includes("client")}>
-            <Typography
-              sx={{ marginLeft: 1, flexGrow: 1 }}
-              variant="h6"
-              color="inherit"
-              component="div"
-            >
-              {ReChat.servers.current_channel?.name || "ReChat"}
-            </Typography>
-          </Show>
-          <Show when={window.location.hostname.includes("localhost")}>
-            <Typography
-              sx={{ marginLeft: 1, flexGrow: 1 }}
-              variant="h6"
-              color="inherit"
-              component="div"
-            >
-              {ReChat.servers.current_channel?.name || "ReChat (Dev)"}
-            </Typography>
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                ReChat.setShowMembers(true);
-              }}
-            >
-              <Group />
-            </IconButton>
-          </Show>
-          <Show when={window.location.hostname.includes("canary")}>
-            <Typography
-              sx={{ marginLeft: 1, flexGrow: 1 }}
-              variant="h6"
-              color="inherit"
-              component="div"
-            >
-              {ReChat.servers.current_channel?.name || "ReChat (Canary)"}
-            </Typography>
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                ReChat.setShowMembers(true);
-              }}
-            >
-              <Group />
-            </IconButton>
-          </Show>
-
+          <Typography
+            sx={{ marginLeft: 1, flexGrow: 1 }}
+            variant="h6"
+            color="inherit"
+            component="div"
+          >
+            {ReChat.servers.current_channel?.name || "ReChat"}
+          </Typography>
           <IconButton
             color="inherit"
             onClick={() => ReChat.setShowSettings(true)}
           >
             <SettingsIcon />
           </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => {
+              ReChat.setShowMembers(true);
+            }}
+          >
+            <Group />
+          </IconButton>
           <IconButton>
             <Avatar
+              sx={{ width: 24, height: 24 }}
               src={revolt.user.generateAvatarURL() ||
                 revolt.user.defaultAvatarURL}
               alt={revolt.user.username}
@@ -114,7 +85,6 @@ const Shell: Component = (props: any) => {
       <Menu />
 
       {/* Shell's Nested Children */}
-
       {props.children}
     </div>
   );

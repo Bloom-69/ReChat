@@ -1,19 +1,26 @@
 import {
   Alert,
   AppBar,
+  Avatar,
+  Button,
   Card,
   CardContent,
   CardHeader,
+  Chip,
   Container,
   Dialog,
   FormControl,
+  FormControlLabel,
   IconButton,
   List,
   ListItem,
+  ListItemAvatar,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   Slide,
   Switch as SwitchMUI,
@@ -21,13 +28,16 @@ import {
   Toolbar,
   Typography,
 } from "@suid/material";
+
 import { TransitionProps } from "@suid/material/transitions/transition";
 
 import {
   Apps,
   ArrowBack,
+  BorderAllRounded,
   Circle,
   Close as CloseIcon,
+  DnsOutlined,
   EmojiEmotions,
   Face,
   FormatPaint,
@@ -43,6 +53,7 @@ import {
 import {
   Component,
   createSignal,
+  For,
   JSXElement,
   Match,
   Show,
@@ -159,8 +170,21 @@ const Settings: Component = () => {
                 </ListItemButton>
               </ListItem>
             )}
+            {ReChat.settings.experiments.nick && (
+              <ListItem>
+                <ListItemButton onClick={() => setTab(3)}>
+                  <ListItemIcon>
+                    <DnsOutlined />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Server-Wide Settings"
+                    secondary="Change your server profile"
+                  />
+                </ListItemButton>
+              </ListItem>
+            )}
             <ListItem>
-              <ListItemButton onClick={() => setTab(3)}>
+              <ListItemButton onClick={() => setTab(4)}>
                 <ListItemIcon>
                   <Science />
                 </ListItemIcon>
@@ -171,7 +195,7 @@ const Settings: Component = () => {
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton onClick={() => setTab(4)}>
+              <ListItemButton onClick={() => setTab(5)}>
                 <ListItemIcon>
                   <Info />
                 </ListItemIcon>
@@ -235,84 +259,37 @@ const Settings: Component = () => {
           (
             <Match when={Tab() === 2}>
               <Alert severity="warning">
-                Chaging Colors and some component requires client restart
+                Changing Colors and some component might requires client restart
               </Alert>
               <List>
-                <Show when={window.location.hostname.includes("localhost")}>
-                  <ListItem>
-                    <ListItemIcon>
-                      <Circle
-                        sx={{ color: ReChat.settings.appearance.primary_color }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Primary Color"
-                      secondary="Unavailable in Dev Version (I know you are working)"
+                <ListItem>
+                  <ListItemIcon>
+                    <Circle
+                      sx={{ color: ReChat.settings.appearance.primary_color }}
                     />
-                    <TextField
-                      disabled
-                      variant="standard"
-                      value={ReChat.settings.appearance.primary_color}
-                      onChange={(e) =>
-                        ReChat.setSettings(
-                          "appearance",
-                          "primary_color",
-                          e.target.value,
-                        )}
-                    />
-                  </ListItem>
-                </Show>
-                <Show when={window.location.hostname.includes("canary")}>
-                  <ListItem>
-                    <ListItemIcon>
-                      <Circle
-                        sx={{ color: ReChat.settings.appearance.primary_color }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Primary Color"
-                      secondary="Unavailable in Canary Version"
-                    />
-                    <TextField
-                      disabled
-                      variant="standard"
-                      value={ReChat.settings.appearance.primary_color}
-                      onChange={(e) =>
-                        ReChat.setSettings(
-                          "appearance",
-                          "primary_color",
-                          e.target.value,
-                        )}
-                    />
-                  </ListItem>
-                </Show>
-                <Show when={window.location.hostname.includes("client")}>
-                  <ListItem>
-                    <ListItemIcon>
-                      <Circle
-                        sx={{ color: ReChat.settings.appearance.primary_color }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Primary Color" />
-                    <TextField
-                      variant="standard"
-                      value={ReChat.settings.appearance.primary_color}
-                      onChange={(e) =>
-                        ReChat.setSettings(
-                          "appearance",
-                          "primary_color",
-                          e.target.value,
-                        )}
-                    />
-                  </ListItem>
-                </Show>
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Primary Color"
+                    secondary="It changes the appbar and some components (Default: #2196f3)"
+                  />
+                  <TextField
+                    variant="standard"
+                    value={ReChat.settings.appearance.primary_color}
+                    onChange={(e) =>
+                      ReChat.setSettings(
+                        "appearance",
+                        "primary_color",
+                        e.target.value,
+                      )}
+                  />
+                </ListItem>
                 <ListItem>
                   <ListItemIcon>
                     <EmojiEmotions />
                   </ListItemIcon>
                   <ListItemText
                     primary="Emoji"
-                    secondary="Changing emoji requires refetch the message to see the effects"
+                    secondary="Changing emoji requires refetch the message to see the effects (Default: Noto Emoji)"
                   />
                   <FormControl>
                     <Select
@@ -343,7 +320,10 @@ const Settings: Component = () => {
                   <ListItemIcon>
                     <Apps />
                   </ListItemIcon>
-                  <ListItemText primary="AppBar Variants" />
+                  <ListItemText
+                    primary="AppBar Variants"
+                    secondary="Changes how the appbar looks (Default: Outlined)"
+                  />
                   <FormControl>
                     <Select
                       variant="standard"
@@ -366,6 +346,43 @@ const Settings: Component = () => {
             </Match>
           )}
         <Match when={Tab() === 3}>
+          <Alert severity="info">Work in progress</Alert>
+          <List>
+            <ListItem>
+              <ListItemText
+                primary="Current Server:"
+                secondary={ReChat.servers.current_server?.name ||
+                  "You aren't in this server!"}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  {ReChat.servers.current_channel?.name.substring(0, 1) ||
+                    revolt.user.username.substring(0, 1)}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Profile Image" />
+              <Button>
+                Change Image
+              </Button>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary="Current Username"
+                secondary={ReChat.servers.current_server?.me?.nickname ||
+                  revolt.user.username}
+              />
+              <TextField
+                label="New Username"
+                variant="standard"
+                value={ReChat.nickname() || ""}
+                onChange={(e) => ReChat.setNickname(e.currentTarget.value)}
+              />
+            </ListItem>
+          </List>
+        </Match>
+        <Match when={Tab() === 4}>
           <Alert severity="warning">
             Some Experiments can cause ReChat more unstable (I think it will be
             """"""stable"""""")
@@ -410,6 +427,24 @@ const Settings: Component = () => {
             </ListItem>
             <ListItem>
               <ListItemIcon>
+                <DnsOutlined />
+              </ListItemIcon>
+              <ListItemText
+                primary="Server-Wide Profile"
+                secondary="Enable Server-Wide Settings"
+              />
+              <SwitchMUI
+                value={ReChat.settings.experiments.nick}
+                checked={ReChat.settings.experiments.nick}
+                onChange={() => {
+                  ReChat.settings.experiments.nick
+                    ? ReChat.setSettings("experiments", "nick", false)
+                    : ReChat.setSettings("experiments", "nick", true);
+                }}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
                 <Window />
               </ListItemIcon>
               <ListItemText
@@ -428,18 +463,10 @@ const Settings: Component = () => {
             </ListItem>
           </List>
         </Match>
-        <Match when={Tab() === 4}>
+        <Match when={Tab() === 5}>
           <Container sx={{ marginTop: 1 }}>
             <Card>
-              <Show when={window.location.hostname.includes("client")}>
-                <CardHeader title="ReChat (Stable)" subheader="Version 0.0.2" />
-              </Show>
-              <Show when={window.location.hostname.includes("localhost")}>
-                <CardHeader title="ReChat (Dev)" subheader="Version 0.0.3" />
-              </Show>
-              <Show when={window.location.hostname.includes("canary")}>
-                <CardHeader title="ReChat (Canary)" subheader="Version 0.0.3" />
-              </Show>
+                <CardHeader title="ReChat (In-Dev)" subheader="Version 0.3" />
               <CardContent>
                 <p>Made by Bloom#9014 (@Bloom in revolt)</p>
 

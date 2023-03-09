@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
+  ListItemText,
 } from "@suid/material";
 
 import * as ReChat from "../../../../lib/ReChat";
@@ -23,15 +24,14 @@ export default function ServerSidebar() {
   return (
     <div>
       <Drawer
-        variant="temporary"
         anchor="left"
         open={ReChat.showServerSidebar()}
         onClose={() => ReChat.setShowServerSidebar(false)}
-        sx={{ zIndex: 9999 }}
       >
         <List disablePadding>
           <ListItem>
             <ListItemButton
+              sx={{ borderRadius: 1 }}
               onClick={() => {
                 ReChat.setServers("current_server", undefined);
                 ReChat.setServers("current_channel", undefined);
@@ -42,13 +42,14 @@ export default function ServerSidebar() {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              Home
+              <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
           <For each={serverlist()}>
             {(server) => (
               <ListItem>
                 <ListItemButton
+                  sx={{ borderRadius: 1 }}
                   onClick={() => {
                     ReChat.setServers("current_server", server);
                     ReChat.setShowServerSidebar(false);
@@ -62,11 +63,13 @@ export default function ServerSidebar() {
                           src={server.generateIconURL()}
                           alt={server.name}
                           sx={{ width: 24, height: 24, background: "#e0e0e0" }}
-                        />
+                        >
+                          {server.name.substring(0, 1)}
+                        </Avatar>
                       </Match>
                     </Switch>
                   </ListItemIcon>
-                  {server.name}
+                  <ListItemText primary={server.name} />
                 </ListItemButton>
               </ListItem>
             )}

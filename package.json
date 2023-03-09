@@ -17,6 +17,7 @@
   "dependencies": {
     "@suid/icons-material": "^0.5.8",
     "@suid/material": "^0.10.1",
+    "@suid/types": "^0.4.0",
     "@suid/vite-plugin": "^0.1.2",
     "comma-separated-tokens": "^2.0.3",
     "dayjs": "^1.11.7",

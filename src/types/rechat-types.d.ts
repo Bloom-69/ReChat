@@ -62,6 +62,6 @@ declare interface settings {
 
     appearance: {
         primary_color: string | undefined;
-        appbar_vairant: "outlined" | "elevation" | undefined
+        appbar_vairant: "outlined" | "elevation" | undefined;
     }
 }

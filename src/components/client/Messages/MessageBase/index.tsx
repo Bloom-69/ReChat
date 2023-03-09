@@ -15,7 +15,7 @@ import {
 } from "@suid/material";
 
 import * as ReChat from "../../../../lib/ReChat";
-import { Reply } from "@suid/icons-material";
+import { Reply, Image } from "@suid/icons-material";
 
 dayjs.extend(relativeTime);
 
@@ -28,50 +28,49 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
 
   return (
     <Grow in={true}>
-      <Card variant="outlined" sx={{ margin: 0, borderRadius: 0 }}>
+      <Card variant="outlined" sx={{ margin: 3 }}>
         <CardHeader
           title={
-            <>
-              <Grow in={true}>
-                <Stack gap={2} direction="row">
-                  <Avatar
-                    src={message.generateMasqAvatarURL() ||
-                      message.member.generateAvatarURL() ||
-                      message.author.generateAvatarURL()}
-                  />
-                  <span
-                    style={{ "font-weight": "bold", "margin-top": "3.2px" }}
-                    class={message.member.colorRole &&
-                        message.member.colorRole.color.includes("gradient")
-                      ? css`
+            <Grow in={true}>
+              <Stack gap={2} direction="row">
+                <Avatar
+                  src={message.generateMasqAvatarURL() ||
+                    message.member.generateAvatarURL() ||
+                    message.author.generateAvatarURL()}
+                  variant="rounded"
+                />
+                <span
+                  style={{ "font-weight": "bold", "margin-top": "3.2px" }}
+                  class={message.member.colorRole &&
+                      message.member.colorRole.color.includes("gradient")
+                    ? css`
                 background: ${message.member.colorRole.color};
                 background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
               `
-                      : css`
+                    : css`
                 color: ${message.member.colorRole?.color || "inherit"};
               `}
-                  >
-                    {message.masquerade?.name ||
-                      message.member?.nickname ||
-                      message.author?.username ||
-                      "Revolt User"}
-                  </span>
-                </Stack>
-              </Grow>
-            </>
+                >
+                  {message.masquerade?.name ||
+                    message.member?.nickname ||
+                    message.author?.username ||
+                    "Revolt User"}
+                </span>
+              </Stack>
+            </Grow>
           }
           subheader={
             <Show when={replies()}>
               <For each={replies()}>
-                {(reply) =>
-                  reply.isUser() && (
+                {(reply) => {
+                  return reply.isUser() && (
                     <Grow
                       in={true}
                     >
                       <Stack sx={{ my: 1 }} direction="row">
-                        <Reply  sx={{mx: .5}}/>
+                        <Reply sx={{ mx: .5 }} />
                         <Avatar
                           sx={{ width: 24, height: 24, marginRight: 1 }}
                           src={reply.author.generateAvatarURL() || ""}
@@ -98,11 +97,19 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
                         <Markdown
                           content={reply.content.length > 24 &&
                               reply.content.substring(0, 50) ||
+                            reply.attachments && "**Contains Attachments**" ||
                             "**Unable to load message**"}
                         />
+                        {reply.attachments && (
+                          <Stack>
+                            <Image/>
+                            <Markdown content={reply.content.length > 12 && reply.content.substring(0,50) || ""}/>
+                          </Stack>
+                        )}
                       </Stack>
                     </Grow>
-                  )}
+                  );
+                }}
               </For>
             </Show>
           }
@@ -113,42 +120,47 @@ const UserMessageBase: Component<{ message: Message }> = ({ message }) => {
             <Show when={message.attachments}>
               <Stack direction="column" gap={2}>
                 <For each={message.attachments}>
-                  {(attachment) => (
-                    <Switch>
-                      <Match when={attachment.metadata.type == "Image"}>
-                        <img
-                          src={attachment.generateURL()}
-                          style={{
-                            "max-width": "500px",
-                            "max-height": "500px",
-                            "border-radius": "4px",
-                          }}
-                        />
-                      </Match>
-                      <Match when={attachment.metadata.type === "Video"}>
-                        <video
-                          src={attachment.generateURL()}
-                          style={{
-                            "max-width": "500px",
-                            "max-height": "500px",
-                            "border-radius": "4px",
-                          }}
-                          controls
-                        />
-                      </Match>
-                      <Match when={attachment.metadata.type === "Audio"}>
-                        <audio
-                          src={attachment.generateURL()}
-                          style={{
-                            "max-width": "500px",
-                            "max-height": "500px",
-                            "border-radius": "4px",
-                          }}
-                          controls
-                        />
-                      </Match>
-                    </Switch>
-                  )}
+                  {(attachment) => {
+                    return (
+                      <Switch>
+                        <Match when={attachment.metadata.type == "Image"}>
+                          <img
+                            loading="lazy"
+                            onClick={() =>
+                              window.location.assign(attachment.generateURL())}
+                            src={attachment.generateURL()}
+                            style={{
+                              "max-width": "500px",
+                              "max-height": "500px",
+                              "border-radius": "4px",
+                            }}
+                          />
+                        </Match>
+                        <Match when={attachment.metadata.type === "Video"}>
+                          <video
+                            src={attachment.generateURL()}
+                            style={{
+                              "max-width": "500px",
+                              "max-height": "500px",
+                              "border-radius": "4px",
+                            }}
+                            controls
+                          />
+                        </Match>
+                        <Match when={attachment.metadata.type === "Audio"}>
+                          <audio
+                            src={attachment.generateURL()}
+                            style={{
+                              "max-width": "500px",
+                              "max-height": "500px",
+                              "border-radius": "4px",
+                            }}
+                            controls
+                          />
+                        </Match>
+                      </Switch>
+                    );
+                  }}
                 </For>
               </Stack>
             </Show>

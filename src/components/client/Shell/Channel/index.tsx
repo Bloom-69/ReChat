@@ -1,5 +1,6 @@
-import { ArrowBack } from "@suid/icons-material";
+import { ArrowBack, Speaker, SpeakerPhone, Tag, VolumeUp, } from "@suid/icons-material";
 import {
+  Avatar,
   Drawer,
   List,
   ListItem,
@@ -7,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@suid/material";
+import { ChannelType } from "revolt-toolset";
 import { For } from "solid-js";
 
 import * as ReChat from "../../../../lib/ReChat";
@@ -20,11 +22,22 @@ async function getMessageFromChannel() {
   ReChat.setServers("isHome", false);
 }
 
+function Voice() {
+  return (
+    <>
+      <VolumeUp />
+    </>
+  );
+}
+
+function Channel() {
+  return <Tag />;
+}
+
 export default function ChannelSidebar() {
   return (
     <div>
       <Drawer
-        variant="temporary"
         anchor="left"
         open={ReChat.showChannelSidebar()}
         sx={{ zIndex: 9999 }}
@@ -32,6 +45,7 @@ export default function ChannelSidebar() {
         <List disablePadding>
           <ListItem>
             <ListItemButton
+              sx={{ borderRadius: 1 }}
               onClick={() => {
                 ReChat.setShowChannelSidebar(false);
                 ReChat.setShowServerSidebar(true);
@@ -53,13 +67,22 @@ export default function ChannelSidebar() {
                   {(channel) => (
                     <ListItem>
                       <ListItemButton
+                        sx={{ borderRadius: 1 }}
                         onClick={() => {
                           ReChat.setServers("current_channel", channel);
                           getMessageFromChannel();
                           ReChat.setShowChannelSidebar(false);
                         }}
                       >
-                        <Markdown content={channel.name} />
+                        <ListItemIcon>
+                          {channel.type === ChannelType.Voice && Voice()}
+                          {channel.icon && <Avatar variant="square" sx={{width: 24, height: 24}} src={channel.generateIconURL()}/>}
+                          {!channel.icon && channel.type !== ChannelType.Voice && Channel()}
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={<Markdown content={channel.name} />}
+                          secondary={channel.description}
+                        />
                       </ListItemButton>
                     </ListItem>
                   )}

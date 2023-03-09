@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, Match, Switch } from "solid-js";
 import * as ReChat from "../../../../lib/ReChat";
 import { ulid } from "ulid";
 
@@ -11,7 +11,7 @@ import {
   TextField,
   Toolbar,
 } from "@suid/material";
-import { Face, Gif, Send } from "@suid/icons-material";
+import { Face, GifBoxOutlined, Send } from "@suid/icons-material";
 
 const [sending, setSending] = createSignal<boolean>(false);
 
@@ -43,14 +43,12 @@ async function sendMessage(message: string) {
 const MessageBox: Component = () => {
   return (
     <Paper
-      variant="outlined"
-      sx={{ position: "sticky", bottom: 0, zIndex: 1, borderRadius: 0 }}
+      sx={{ position: "sticky", bottom: 10, mx: 2, zIndex: 1 }}
     >
       <Toolbar>
         <FormControl fullWidth sx={{ marginRight: 1 }}>
           <TextField
             multiline
-            variant="standard"
             size="small"
             sx={{ width: "auto" }}
             value={ReChat.newMessage()}
@@ -79,18 +77,33 @@ const MessageBox: Component = () => {
               ReChat.setAnchorGif(event.currentTarget);
             }}
           >
-            <Gif/>
+            <GifBoxOutlined />
           </IconButton>
         )}
-        <Button
-          endIcon={<Send />}
-          aria-label="Send"
-          variant="contained"
-          disabled={sending()}
-          onClick={() => sendMessage(ReChat.newMessage())}
-        >
-          Send
-        </Button>
+          <Switch>
+            <Match when={ReChat.newMessage() == ""}>
+              <Button
+                endIcon={<Send />}
+                aria-label="Send"
+                variant="outlined"
+                disabled={sending()}
+                onClick={() => sendMessage(ReChat.newMessage())}
+              >
+                Send
+              </Button>
+            </Match>
+            <Match when={ReChat.newMessage() !== ""}>
+              <Button
+                endIcon={<Send />}
+                aria-label="Send"
+                variant="contained"
+                disabled={sending()}
+                onClick={() => sendMessage(ReChat.newMessage())}
+              >
+                Send
+              </Button>
+            </Match>
+          </Switch>
       </Toolbar>
     </Paper>
   );

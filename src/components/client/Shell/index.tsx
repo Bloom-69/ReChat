@@ -12,6 +12,7 @@ import {
 } from "@suid/material";
 import {
   Group,
+  Info,
   Menu as MenuIcon,
   Settings as SettingsIcon,
 } from "@suid/icons-material";
@@ -23,6 +24,8 @@ import { Settings } from "../Settings";
 import ServerSidebar from "./Server";
 import ChannelSidebar from "./Channel";
 import { Menu } from "./Menu";
+import ServerInfo from "./ServerInfo";
+import TourShell from "./Tour";
 
 const Shell: Component = (props: any) => {
   return (
@@ -40,13 +43,19 @@ const Shell: Component = (props: any) => {
           >
             <MenuIcon />
           </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={() => ReChat.setShowInfo(true)}
+          >
+            <Info/>
+          </IconButton>
           <Typography
-            sx={{ marginLeft: 1, flexGrow: 1 }}
+            sx={{ mx: 'auto', textAlign: 'center', flexGrow: 1 }}
             variant="h6"
             color="inherit"
             component="div"
           >
-            {ReChat.servers.current_channel?.name || "ReChat"}
+            {ReChat.servers.current_server?.name || "ReChat"} - {ReChat.servers.current_channel?.name || "Home"}
           </Typography>
           <IconButton
             color="inherit"
@@ -83,6 +92,11 @@ const Shell: Component = (props: any) => {
       <ChannelSidebar />
       <Settings />
       <Menu />
+      <ServerInfo/>
+
+      {/* Tour */}
+
+      <TourShell/>
 
       {/* Shell's Nested Children */}
       {props.children}

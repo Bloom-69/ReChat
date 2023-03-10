@@ -113,6 +113,7 @@ const Settings: Component = () => {
             <Match when={Tab() === 0}>
               <IconButton
                 edge="start"
+                sx={{marginLeft: 'auto'}}
                 color="inherit"
                 onClick={() => ReChat.setShowSettings(false)}
                 aria-label="close"
@@ -123,6 +124,7 @@ const Settings: Component = () => {
             <Match when={Tab() !== 0}>
               <IconButton
                 edge="start"
+                sx={{marginLeft: 'auto'}}
                 color="inherit"
                 onClick={() => setTab(0)}
                 aria-label="close"
@@ -466,7 +468,7 @@ const Settings: Component = () => {
         <Match when={Tab() === 5}>
           <Container sx={{ marginTop: 1 }}>
             <Card>
-                <CardHeader title="ReChat (In-Dev)" subheader="Version 0.3" />
+                <CardHeader title="ReChat (In-Dev)" subheader="Version 0.3 (Codename: Unknow)" />
               <CardContent>
                 <p>Made by Bloom#9014 (@Bloom in revolt)</p>
 

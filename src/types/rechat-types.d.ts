@@ -64,4 +64,8 @@ declare interface settings {
         primary_color: string | undefined;
         appbar_vairant: "outlined" | "elevation" | undefined;
     }
+
+    tour: {
+        show: boolean
+    }
 }

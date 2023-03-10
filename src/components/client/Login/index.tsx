@@ -3,7 +3,6 @@ import {
   Breadcrumbs,
   Button,
   ButtonGroup,
-  CircularProgress,
   Container,
   FormControl,
   TextField,
@@ -72,10 +71,7 @@ const Login: Component<Login> = ({
           >
           </img>
           <Alert severity="warning" sx={{ my: 1 }}>
-            This client is currently in Beta. Some features may change overtime
-          </Alert>
-          <Alert severity="info" sx={{ my: 1 }}>
-            Localhost may works the best than normal
+            This client is currently in In-Dev. Some features may change overtime (or it will add new feature) until Version 1
           </Alert>
           <form
             onSubmit={async (e) => {
@@ -126,7 +122,7 @@ const Login: Component<Login> = ({
             </FormControl>
           </form>
 
-          <Breadcrumbs sx={{ fontSize: 10, my: 2 }}>
+          <Breadcrumbs sx={{ fontSize: 10, my: 2, textAlign: 'center' }}>
             <code>
               {window.navigator.userAgent}
             </code>

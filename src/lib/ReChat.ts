@@ -85,6 +85,10 @@ export const [settings, setSettings] = createLocalStore<config>("settings", {
     primary_color: "#2196f3",
     appbar_vairant: "outlined",
   },
+
+  tour: {
+    show: true
+  }
 });
 
 // Fetch status list
@@ -127,3 +131,11 @@ export const [showMembers, setShowMembers] = createSignal<boolean>(false);
 // Menu Anchor
 
 export const [anchorEl, setAnchorEl] = createSignal<null | HTMLElement>(null);
+
+// Server info
+
+export const [showInfo, setShowInfo] = createSignal<boolean>(false);
+
+// Tour Components (Is just guiding you so you can't mess it around :trol:)
+
+export const [showTour, setShowTour] = createSignal<boolean>(settings.tour.show);

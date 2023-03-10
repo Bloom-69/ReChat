@@ -11,7 +11,6 @@ export default function ServerInfo() {
             <Typography variant="body1">{ReChat.servers.current_server?.description || "Unable to fetch description"}</Typography>
             <Typography variant="subtitle1">Server Owner</Typography>
             <Typography variant="body1">{ReChat.servers.current_server?.owner.username || "Unable to fetch username"}</Typography>
-            <Typography variant="subtitle1">Created in: {ReChat.servers.current_server?.createdAt || "Unable to fetch Date"}</Typography>
         </DialogContent>
         <DialogActions>
             <ButtonGroup>

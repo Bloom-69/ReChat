@@ -15,3 +15,11 @@ code {
   border-radius: 4px;
   font-family: "Roboto Mono", sans-serif;
 }
+
+::file-selector-button {
+  display: none;
+}
+
+::-webkit-file-upload-button {
+  display: none;
+}

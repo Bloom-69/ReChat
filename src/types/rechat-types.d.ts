@@ -10,7 +10,7 @@ declare interface loginValues {
     email?: string;
     password?: string;
     token?: string;
-    mfa_token?: string;
+    mfa_token?: string; /* Unused? */
 }
 
 declare interface server {
@@ -50,6 +50,7 @@ declare interface settings {
     showMedia: boolean;
     debug: boolean;
     emoji: "mutant" | "twemoji" | "fluent-3d" | "noto" | string;
+    
     experiments: {
         picker: boolean,
         gifbox: boolean,

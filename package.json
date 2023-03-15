@@ -15,8 +15,9 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
-    "@suid/icons-material": "^0.5.8",
-    "@suid/material": "^0.10.1",
+    "@suid/icons-material": "^0.5.10",
+    "@suid/material": "^0.11.0",
+    "@suid/system": "^0.9.0",
     "@suid/types": "^0.4.0",
     "@suid/vite-plugin": "^0.1.2",
     "comma-separated-tokens": "^2.0.3",

@@ -139,3 +139,9 @@ export const [showInfo, setShowInfo] = createSignal<boolean>(false);
 // Tour Components (Is just guiding you so you can't mess it around :trol:)
 
 export const [showTour, setShowTour] = createSignal<boolean>(settings.tour.show);
+
+// Custom Status
+
+export const [showCustom, setShowCustom] = createSignal<boolean>(false);
+
+export const [showCreation, setShowCreation] = createSignal<boolean>(false);

@@ -1,8 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@suid/icons-material': ^0.5.8
-  '@suid/material': ^0.10.1
+  '@suid/icons-material': ^0.5.10
+  '@suid/material': ^0.11.0
+  '@suid/system': ^0.9.0
   '@suid/types': ^0.4.0
   '@suid/vite-plugin': ^0.1.2
   comma-separated-tokens: ^2.0.3
@@ -37,8 +38,9 @@ specifiers:
   vite-plugin-solid: ^2.5.0
 
 dependencies:
-  '@suid/icons-material': 0.5.8_solid-js@1.6.10
-  '@suid/material': 0.10.1_solid-js@1.6.10
+  '@suid/icons-material': 0.5.10_solid-js@1.6.10
+  '@suid/material': 0.11.0_solid-js@1.6.10
+  '@suid/system': 0.9.0_solid-js@1.6.10
   '@suid/types': 0.4.0_solid-js@1.6.10
   '@suid/vite-plugin': 0.1.2_vite@4.1.1
   comma-separated-tokens: 2.0.3
@@ -646,64 +648,64 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
-  /@suid/base/0.6.3_solid-js@1.6.10:
-    resolution: {integrity: sha512-LrQEmkXySozrgwf482i9AaK9fmYzN8UVxEGZd+8pufjDY6MzJFYHm363ODm8Kjho2L96wqWGuGBxO6uSIKtazQ==}
+  /@suid/base/0.7.0_solid-js@1.6.10:
+    resolution: {integrity: sha512-RSxmGVdDK6+ZX0PEx1CDo3cc71c33SUm5WH6owr2h4u214nwmZLBB+GQA5TqrMTBuJGloBM9h6qoVSJ0JhS3Wg==}
     peerDependencies:
       solid-js: ^1.6.7
     dependencies:
       '@popperjs/core': 2.11.6
-      '@suid/css': 0.2.1
-      '@suid/system': 0.8.3_solid-js@1.6.10
+      '@suid/css': 0.2.2
+      '@suid/system': 0.9.0_solid-js@1.6.10
       '@suid/types': 0.4.0_solid-js@1.6.10
       '@suid/utils': 0.6.1_solid-js@1.6.10
       clsx: 1.2.1
       solid-js: 1.6.10
     dev: false
 
-  /@suid/css/0.2.1:
-    resolution: {integrity: sha512-ictV73loNG7BH9ID5PRGnuMryrAHOfyspaCZsQUzz5cTeLttFYgD/QKUcWr4FEG/1O7GVzgJlqtIT1r55LbCtw==}
+  /@suid/css/0.2.2:
+    resolution: {integrity: sha512-6hE9LVBFg/5Zeeu3FlMILE12szS3b3sjERV+FZ2ikKKiyc5IgB9XAu+bqC0y/OuSoVApMY7QOaPtYCoquIq5og==}
     dev: false
 
-  /@suid/icons-material/0.5.8_solid-js@1.6.10:
-    resolution: {integrity: sha512-FU2FTdvLi0NyoFBjxGimuFPPkAFpgA9tjOBLIwvAjb+Styk8hcafg067peNzwfiDRgM78BTsBiJRBJISap2H/A==}
+  /@suid/icons-material/0.5.10_solid-js@1.6.10:
+    resolution: {integrity: sha512-3ZIe3ye4vQjXncPbgM+TzsVhMvZeXQ+1iml0+Jawi4o359YlTiKRBvhZn+d8Jbkzl//ngV81YNbVivOCbAhGqw==}
     peerDependencies:
       solid-js: ^1.6.7
     dependencies:
-      '@suid/material': 0.10.1_solid-js@1.6.10
+      '@suid/material': 0.11.0_solid-js@1.6.10
       solid-js: 1.6.10
     dev: false
 
-  /@suid/material/0.10.1_solid-js@1.6.10:
-    resolution: {integrity: sha512-58MZRbC3z4kTiIfS1v2DrNypINrSBjydhIKV61419m1N35v04aKCoprB4jYhPHhDgIRyQ7a+glMddKSuCwWVqw==}
+  /@suid/material/0.11.0_solid-js@1.6.10:
+    resolution: {integrity: sha512-G3FuIXFrDIA4shfGZV6ERVOB/aMwfc6in/ktRLa+Kd2BrkAdKGwc5VleRAdSJ051+YS4UKnnpSfTql4/kq0PMA==}
     peerDependencies:
       solid-js: ^1.6.7
     dependencies:
-      '@suid/base': 0.6.3_solid-js@1.6.10
-      '@suid/css': 0.2.1
-      '@suid/system': 0.8.3_solid-js@1.6.10
+      '@suid/base': 0.7.0_solid-js@1.6.10
+      '@suid/css': 0.2.2
+      '@suid/system': 0.9.0_solid-js@1.6.10
       '@suid/types': 0.4.0_solid-js@1.6.10
       '@suid/utils': 0.6.1_solid-js@1.6.10
       clsx: 1.2.1
       solid-js: 1.6.10
     dev: false
 
-  /@suid/styled-engine/0.4.1_solid-js@1.6.10:
-    resolution: {integrity: sha512-TzY/2zuspzVnx8q5PG04FgNzkJlESLZwxMYQK4VkIuqTm4CrC8VNMunBBUdv+4DVpQKArtO1ZnTGNNtE34rD8Q==}
+  /@suid/styled-engine/0.4.2_solid-js@1.6.10:
+    resolution: {integrity: sha512-XC2mNrrLpxoVqoM5fvtS5oCIW4oWDlo0Qj9lUwZeKwDYYx75WuZPfKrjANLUzWYUqTi6p8u+bckJJiacic4PHA==}
     peerDependencies:
       solid-js: ^1.6.7
     dependencies:
-      '@suid/css': 0.2.1
+      '@suid/css': 0.2.2
       '@suid/utils': 0.6.1_solid-js@1.6.10
       solid-js: 1.6.10
     dev: false
 
-  /@suid/system/0.8.3_solid-js@1.6.10:
-    resolution: {integrity: sha512-zWG/gOycH02EU5KHvRSWuJwKQnRgb1MXKbcZewOu0HYoOx6nTy6hWtoMFVbuYGLpMlzW8W8ABen91qhGWFDlNA==}
+  /@suid/system/0.9.0_solid-js@1.6.10:
+    resolution: {integrity: sha512-HQeSMN67eCkDN2lDeKbEHrPZQI4npBDy5+S3P2Q99eHC7bUpPFkrPaC1BNENr+xWOUvfIMCrUQSbVvIlTGigzQ==}
     peerDependencies:
       solid-js: ^1.6.7
     dependencies:
-      '@suid/css': 0.2.1
-      '@suid/styled-engine': 0.4.1_solid-js@1.6.10
+      '@suid/css': 0.2.2
+      '@suid/styled-engine': 0.4.2_solid-js@1.6.10
       '@suid/types': 0.4.0_solid-js@1.6.10
       '@suid/utils': 0.6.1_solid-js@1.6.10
       clsx: 1.2.1

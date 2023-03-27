@@ -21,4 +21,4 @@ A Solid Material UI Revolt Client
 
 ## Current Bugs
 
-> When is `isHome = false`, the settings breaks aparts
+> When is `isHome = false`, the settings breaks aparts (fixed)

@@ -13,7 +13,7 @@ import * as ReChat from "../../../../lib/ReChat";
 
 import { createSignal, For, Match, Switch } from "solid-js";
 
-import type { User } from "revolt-toolset";
+import type { User } from "revkit";
 
 import { revolt } from "../../../../lib/revolt";
 

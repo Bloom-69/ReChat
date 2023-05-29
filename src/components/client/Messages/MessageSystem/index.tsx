@@ -1,5 +1,5 @@
 import { Avatar, Card, CardContent, CardHeader, Stack } from "@suid/material";
-import { SystemMessage, SystemMessageType } from "revolt-toolset";
+import { SystemMessage, SystemMessageType } from "revkit";
 import type { Component } from "solid-js";
 import { Markdown } from "../../../markdown";
 

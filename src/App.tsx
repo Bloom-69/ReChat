@@ -32,8 +32,6 @@ const main_theme = createTheme({
 function App() {
   return (
     <>
-        <ThemeProvider theme={main_theme}>
-        <CssBaseline enableColorScheme/>
           <main>
             <Login
               client={client}
@@ -66,7 +64,6 @@ function App() {
               </>
             )}
           </main>
-        </ThemeProvider>
     </>
   );
 }

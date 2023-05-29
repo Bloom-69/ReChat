@@ -8,7 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@suid/material";
-import { ChannelType } from "revolt-toolset";
+import { ChannelType } from "revkit";
 import { For } from "solid-js";
 
 import * as ReChat from "../../../../lib/ReChat";

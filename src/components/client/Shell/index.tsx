@@ -1,4 +1,4 @@
-import { Component, Show } from "solid-js";
+import { Component, JSX, Show } from "solid-js";
 
 import {
   AppBar,
@@ -27,7 +27,7 @@ import { Menu } from "./Menu";
 import ServerInfo from "./ServerInfo";
 import TourShell from "./Tour";
 
-const Shell: Component = (props: any) => {
+const Shell = (props: any) => {
   return (
     <div>
       <AppBar

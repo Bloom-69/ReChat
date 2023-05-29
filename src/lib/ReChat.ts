@@ -12,7 +12,7 @@ import type {
   user,
 } from "../types/rechat-types";
 
-import type { BaseMessage } from "revolt-toolset";
+import type { BaseMessage } from "revkit";
 
 export const [newMessage, setNewMessage] = createSignal<string>("");
 

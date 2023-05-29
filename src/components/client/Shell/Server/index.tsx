@@ -12,7 +12,7 @@ import * as ReChat from "../../../../lib/ReChat";
 
 import { createSignal, For, Match, Switch } from "solid-js";
 
-import type { Server } from "revolt-toolset";
+import type { Server } from "revkit";
 
 import { revolt } from "../../../../lib/revolt";
 import { Home as HomeIcon } from "@suid/icons-material";

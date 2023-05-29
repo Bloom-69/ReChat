@@ -25,7 +25,7 @@ async function sendMessage(message: string) {
           content: message,
           nonce,
         })
-        .catch((e) => {
+        .catch((e: any) => {
           throw e;
         });
     }

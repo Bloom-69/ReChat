@@ -1,4 +1,4 @@
-import { BaseMessage, Message } from "revolt-toolset";
+import { BaseMessage, Message } from "revkit";
 import { Component, createSignal, For, Match, Show, Switch } from "solid-js";
 import { css } from "solid-styled-components";
 

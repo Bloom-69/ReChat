@@ -1,24 +1,20 @@
 # ReChat
 
-A Solid Material UI Revolt Client
+A Solid ~~Material UI~~ Revolt Client
 
 ## Features
 
 > Server/Channel Sidebar
 
-> Custom Markdown (With Custom Emoji Support)
+> Custom Markdown (With **Legacy** Custom Emoji Support)
 
 > Category Support
 
 > Functional Setting
 
-## Todo
+## Development Commands
 
-- [ ] Add Image Support
-- [ ] Emoji/Gifbox Picker Experimental
-- [ ] Experiments
-- [ ] Something else
-
-## Current Bugs
-
-> When is `isHome = false`, the settings breaks aparts (fixed)
+| Command | What is for? |
+|--------------------|---------------------------------------------------------------|
+| `dev`              | Create and start the server (By default is `localhost:3000` ) |
+| `codespaces:start` | (Github Codespaces only) Create and start the server ( `--host` is marked) |

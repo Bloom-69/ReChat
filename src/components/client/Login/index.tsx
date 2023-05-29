@@ -1,20 +1,16 @@
 import {
   Alert,
   Breadcrumbs,
-  Button,
-  ButtonGroup,
-  Container,
   FormControl,
-  TextField,
 } from "@suid/material";
 
 import { Accessor, batch, Component, createSignal, Setter } from "solid-js";
 import { SetStoreFunction } from "solid-js/store";
 
-import type { Client } from "revolt-toolset";
+import type { Client } from "revkit";
 
 import type { user } from "../../../types/rechat-types";
-import { LoginOutlined } from "@suid/icons-material";
+import { styled } from "solid-styled-components";
 
 interface Login {
   client: Client;
@@ -42,7 +38,7 @@ const Login: Component<Login> = ({
       await client.authenticate({
         email: email,
         password: password,
-        friendly_name: "ReChat",
+        friendly_name: "Glow (Dev)",
       }).catch((e) => {
         throw e;
       }).finally(() => {
@@ -57,10 +53,43 @@ const Login: Component<Login> = ({
     }
   }
 
+  const Base = styled("div")`
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  `
+
+  const FormGroup = styled("form")`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  `
+
+  const TextArea = styled("input")`
+    background: #000;
+    color: #fff;
+    padding: 0.3em;
+  `
+
+  const ButtonGroup = styled("div")`
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  `
+
+  const Button = styled('button')`
+    background: #0f0e10;
+    color: #e1edf9;
+    
+    &:disabled {
+      opacity: 20%;
+    }
+  `
+
   return (
     <>
       {!logged() && (
-        <Container fixed sx={{ marginTop: 2, justifyContent: "center" }}>
+        <Base>
           <img
             style={{
               display: "block",
@@ -73,7 +102,8 @@ const Login: Component<Login> = ({
           <Alert severity="warning" sx={{ my: 1 }}>
             This client is currently in In-Dev. Some features may change overtime (or it will add new feature) until Version 1
           </Alert>
-          <form
+          <FormGroup
+            name="Login"
             onSubmit={async (e) => {
               e.preventDefault();
               if (email() && password()) {
@@ -90,44 +120,41 @@ const Login: Component<Login> = ({
               }
             }}
           >
-            <FormControl fullWidth>
-              <TextField
-                sx={{ my: 1 }}
-                label="Email"
-                value={email() || ""}
-                onChange={(e) =>
-                  setEmail(e.currentTarget.value)}
-              />
-              <TextField
-                sx={{ my: 1 }}
-                label="Password"
-                type="password"
-                value={password() || ""}
-                onChange={(e) =>
-                  setPassword(e.currentTarget.value)}
-              />
-              <ButtonGroup fullWidth>
-                <Button
-                  startIcon={<LoginOutlined />}
-                  variant="contained"
-                  disabled={loading()}
-                  type="submit"
-                >
-                  Login
-                </Button>
-                <Button variant="contained" disabled={true}>
-                  Login with Token (Coming Soon)
-                </Button>
-              </ButtonGroup>
-            </FormControl>
-          </form>
+            <TextArea 
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email() || ""}
+              onChange={(e) =>
+                setEmail(e.currentTarget.value)}
+            />
+            <TextArea
+              name="password"
+              placeholder="Password"
+              type="password"
+              value={password() || ""}
+              onChange={(e) =>
+                setPassword(e.currentTarget.value)}
+            />
+            <ButtonGroup>
+              <Button
+                disabled={loading()}
+                type="submit"
+              >
+                Login
+              </Button>
+              <Button disabled={true}>
+                Login with Token (Coming Soon)
+              </Button>
+            </ButtonGroup>
+          </FormGroup>
 
           <Breadcrumbs sx={{ fontSize: 10, my: 2, textAlign: 'center' }}>
             <code>
               {window.navigator.userAgent}
             </code>
           </Breadcrumbs>
-        </Container>
+        </Base>
       )}
     </>
   );
